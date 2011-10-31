@@ -9,7 +9,7 @@
 	</appender>
 
 	<appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="${sigafrota.root}/WEB-INF/logs/sigafrota-log.txt" />
+		<param name="File" value="${xsd.root}/WEB-INF/logs/xsd-log.txt" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd-HH'.txt'" />
 		<param name="Append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -19,7 +19,7 @@
 
 	<!-- log detail configuration -->
 	
-	<logger name="br.org.sigafrota">
+	<logger name="br.org.acao">
 		<level value="warn" />
 		<appender-ref ref="FILE" />
 	</logger>

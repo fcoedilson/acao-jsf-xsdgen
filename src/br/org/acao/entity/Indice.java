@@ -1,6 +1,8 @@
 package br.org.acao.entity;
 
-public class Indice {
+import java.io.Serializable;
+
+public class Indice implements Serializable{
 	
 	private String key;
 	private String path;

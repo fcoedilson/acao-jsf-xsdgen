@@ -2,7 +2,18 @@
 <faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
-
+	
+	
+	<converter>
+		<converter-id>entityConverter</converter-id>
+		<converter-class>br.org.acao.conversores.EntityConverter</converter-class>
+	</converter>
+	
+	<converter>
+		<converter-id>campoConverter</converter-id>
+		<converter-class>br.org.acao.conversores.CampoConverter</converter-class>
+	</converter>
+	
 	<application>
 		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
 		<message-bundle>messages</message-bundle>
@@ -13,4 +24,6 @@
 		</locale-config>
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
+	
+	
 </faces-config>

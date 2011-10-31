@@ -27,6 +27,14 @@
     <xs:complexType name="${documento.formName}">
         <xs:sequence>
 #foreach($field in $documento.campos)
+
+
+#if($field.campos > 0)
+ 
+ 
+#end
+
+
 #if($field.tipo == 'text')
         <xs:element name="${field.name}" minOccurs="${field.obrigatorio}">
             <xs:annotation>

@@ -3,6 +3,8 @@ package br.org.acao.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.model.SelectItem;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +29,7 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 	private int obrigatorio;
 	private Indice indice = new Indice();
 	private Campo campo = new Campo();
+	private Campo nivelCampo = new Campo();
 	private List<Indice> indices = new ArrayList<Indice>();;
 	private List<Campo> campos  = new ArrayList<Campo>();
 
@@ -35,6 +38,21 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 		indices = new ArrayList<Indice>();
 		campos = new ArrayList<Campo>();
 		return new Documento();
+	}
+
+	public boolean getCampoStatus(){
+
+		return campos.size() > 0;
+	}
+	
+	public List<SelectItem> getCampoList(){
+
+		List<SelectItem> result = new ArrayList<SelectItem>();
+		for (Campo c : campos) {
+			result.add(new SelectItem(c, c.getName()));
+		}
+
+		return result;
 	}
 
 	@Override
@@ -85,11 +103,11 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 		d.setClassificacao(this.classificacao);
 		d.setCampos(this.campos);
 		d.setIndices(this.indices);
-		
+
 		byte[] bytes = VelocityUtil.merge("xsd-schema.vm", new String[]{"documento"}, new Object[]{d});
 		return DownloadFileUtil.downloadFile(bytes, "teste.xsd", "application/text");   //downloadKMLNoZipFile(bytes);
 	}
-	
+
 	public int getObrigatorio() {
 		return obrigatorio;
 	}
@@ -163,6 +181,13 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 		this.targetNamespace = targetNamespace;
 	}
 
+	public Campo getNivelCampo() {
+		return nivelCampo;
+	}
+
+	public void setNivelCampo(Campo nivelCampo) {
+		this.nivelCampo = nivelCampo;
+	}
 
 	@Override
 	protected BaseService<Integer, Documento> retrieveEntityService() {

@@ -33,7 +33,7 @@
 
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>xds.root</param-value>
+		<param-value>xsd.root</param-value>
 	</context-param>
 	<!-- Enables Spring Security -->
 

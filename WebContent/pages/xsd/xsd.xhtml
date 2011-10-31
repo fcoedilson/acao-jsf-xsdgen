@@ -6,7 +6,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:rich="http://richfaces.org/rich"
       xmlns:a4j="http://richfaces.org/a4j"
-     xmlns:c="http://java.sun.com/jstl/core">
+     xmlns:c="http://java.sun.com/jstl/core"
+     xmlns:t="http://myfaces.apache.org/tomahawk">
       
      
 	<div id="cadastro">
@@ -29,27 +30,145 @@
 
 			    <legend>Informações do XSD</legend>	
 			    
-	
-					<dt><h:outputLabel value="Identificador" for="id" styleClass="labelNegrito"/></dt>
+					<dt><h:outputLabel value="Form ID" for="id" styleClass="labelNegrito"/></dt>
 					<dd>
 						<h:inputText id="id" value="#{xmlBean.formName}" required="true"  size="40" maxlength="255" style="text-transform:none;">
 						</h:inputText>
 						<rich:message errorClass="error" for="id" styleClass="message"/>
 					</dd>
-			  		
-			  		<dt><h:outputLabel value="Título" for="titulo" 	styleClass="labelNegrito"/></dt>	
+
+			  		<dt><h:outputLabel value="Nome" for="titulo" 	styleClass="labelNegrito"/></dt>	
 			  		<dd>	  	
 						<h:inputText id="titulo" value="#{xmlBean.titulo}" required="true"  size="50" maxlength="100" style="text-transform:none;">
 						</h:inputText>
 						<rich:message errorClass="error" for="titulo" styleClass="message"/>
 					</dd>
-				
+
 					<dt><h:outputLabel value="Classificação" for="classificacao" 	styleClass="labelNegrito"/></dt>
 					<dd>
 						<h:inputText id="classificacao" value="#{xmlBean.classificacao}" required="true"  size="50" maxlength="100" style="text-transform:none;">
 						</h:inputText>
 						<rich:message errorClass="error" for="classificacao" styleClass="message"/>
 					</dd>
+
+	    	</fieldset>
+
+			<fieldset style="margin-bottom:20px">
+
+			    <legend>Campos do XSD</legend>
+
+					<dt><h:outputLabel value="Campo ID" for="idcampo" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:inputText id="idcampo" value="#{xmlBean.campo.name}"  size="30" maxlength="255" style="text-transform:none;">
+						</h:inputText>
+						<rich:message errorClass="error" for="idcampo" styleClass="message"/>
+					</dd>
+					
+					<dt><h:outputLabel value="Nome" for="nomeCampo" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:inputText id="nomeCampo" value="#{xmlBean.campo.label}"  size="40" maxlength="255" style="text-transform:none;">
+						</h:inputText>
+						<rich:message errorClass="error" for="nomeCampo" styleClass="message"/>
+					</dd>
+					
+					<dt><h:outputLabel value="Mascara" for="maskara" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:selectOneMenu id="maskara" value="#{xmlBean.campo.maskara}" style="width:100px">
+							<f:selectItem itemLabel="Nenhuma" itemValue=""/>
+							<f:selectItem itemLabel="Númerico" itemValue="[0-9]+"/>
+							<f:selectItem itemLabel="CPF" itemValue="[0-9]{3}\."/>
+							<f:selectItem itemLabel="Númerico" itemValue="[0-9]+"/>
+			    		</h:selectOneMenu>
+			    		<rich:message errorClass="error" for="tipoCampo" styleClass="message"/>
+					</dd>
+					
+					<dt><h:outputLabel value="Tipo" for="tipoCampo" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:selectOneMenu id="tipoCampo" value="#{xmlBean.campo.tipo}" required="true" style="width:100px">
+							<f:selectItem itemLabel="Texto" itemValue="text"/>
+							<f:selectItem itemLabel="Inteiro" itemValue="integer"/>
+							<f:selectItem itemLabel="Float" itemValue="float"/>
+							<f:selectItem itemLabel="Data" itemValue="data"/>
+							<f:selectItem itemLabel="Select" itemValue="select"/>
+							<f:selectItem itemLabel="Boolean" itemValue="boolean"/>
+			    		</h:selectOneMenu>
+			    		<rich:message errorClass="error" for="tipoCampo" styleClass="message"/>
+					</dd>
+					
+					<dt><h:outputLabel value="Obrigatório" for="obrigatorio" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:selectOneMenu id="obrigatorio" value="#{xmlBean.campo.obrigatorio}" style="width:60px">
+							<f:selectItem itemLabel="Sim" itemValue="1"/>
+							<f:selectItem itemLabel="Não" itemValue="0"/>
+				    		</h:selectOneMenu>
+			    		<rich:message errorClass="error" for="obrigatorio" styleClass="message"/>
+					</dd>
+					
+					
+					<c:if test="#{xmlBean.campoStatus}">
+					
+						<dt><h:outputLabel value="Incluir como subnível de" for="campoList" styleClass="labelNegrito"/></dt>
+						<dd>
+							<h:selectOneMenu id="campoList" value="#{xmlBean.nivelCampo}" style="width:180px" converter="campoConverter">
+								<f:selectItem itemLabel="Selecione ..." itemValue=""/>
+			    				<t:selectItems value="#{xmlBean.campos}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>
+				    		</h:selectOneMenu>
+				    		<rich:message errorClass="error" for="campoList" styleClass="message"/>
+						</dd>
+					</c:if>
+
+					<h:commandLink action="#{xmlBean.adicionarCampo}" value="Adicionar" styleClass="novo" style="padding-left:20px">
+			      		<a4j:support event="onclick" reRender="dataTable2"/>
+			      	</h:commandLink>
+			    
+					<rich:dataTable id="dataTable2" value="#{xmlBean.campos}" var="campo" rows="10" rowKeyVar="index"
+		      		   rowClasses="even, odd" 
+			      		onRowMouseOver="jQuery(this).addClass('trHover')" 
+			      		onRowMouseOut="jQuery(this).removeClass('trHover')" width="100%">
+		
+		 		      	<c:if test="#{empty xmlBean.campos}">
+							<rich:column>
+								<f:facet name="header">Nenhum campo cadastrado.</f:facet>
+							</rich:column>
+						</c:if>
+		
+			      		<c:if test="#{not empty xmlBean.campos}" >
+		
+							<rich:column width="2%" style="text-align: center;" > 
+								<f:facet name="header"><h:outputText value="Nº" /></f:facet>
+								<h:outputText value="#{index+1}" style="color: black;"/>
+							</rich:column>
+		
+							<rich:column width="20%" style="text-align: left;" > 
+								<f:facet name="header"><h:outputText value="Identif." /></f:facet>
+								<h:outputText value="#{campo.name}" style="color: black;"/>
+							</rich:column>
+	
+							<rich:column width="20%" style="text-align: left;" > 
+								<f:facet name="header"><h:outputText value="Nome" /></f:facet>
+								<h:outputText value="#{campo.label}" style="color: black;"/>
+							</rich:column>
+							
+							<rich:column width="20%" style="text-align: left;" > 
+								<f:facet name="header"><h:outputText value="Tipo" /></f:facet>
+								<h:outputText value="#{campo.tipo}" style="color: black;"/>
+							</rich:column>
+							
+							<rich:column width="40%" style="text-align: left;" > 
+								<f:facet name="header"><h:outputText value="Mask" /></f:facet>
+								<h:outputText value="#{campo.maskara}" style="color: black;"/>
+							</rich:column>
+		
+							<rich:column width="2%" style="text-align: center;">
+								<f:facet name="header"><h:outputText value="Excluir" /></f:facet>
+								<h:commandLink id="remove" styleClass="excluir"  action="#{xmlBean.removeCampo}" value="Excluir">
+									<f:setPropertyActionListener target="#{xmlBean.campo}" value="#{campo}"/>
+									<a4j:support event="oncomplete" reRender="paginaPrincipal"/>
+								</h:commandLink>
+							</rich:column>
+
+						</c:if>
+		      		</rich:dataTable>
 
 	    	</fieldset>
 	    	
@@ -105,106 +224,7 @@
 					</c:if>
 	      		</rich:dataTable>
 			</fieldset>
-	    	
-			<fieldset style="margin-bottom:20px">
 
-			    <legend>Campos do XSD</legend>
-			    
-					<dt><h:outputLabel value="Identif." for="idcampo" styleClass="labelNegrito"/></dt>
-					<dd>
-						<h:inputText id="idcampo" value="#{xmlBean.campo.name}"  size="30" maxlength="255" style="text-transform:none;">
-						</h:inputText>
-						<rich:message errorClass="error" for="idcampo" styleClass="message"/>
-					</dd>
-					
-					<dt><h:outputLabel value="Nome" for="nomeCampo" styleClass="labelNegrito"/></dt>
-					<dd>
-						<h:inputText id="nomeCampo" value="#{xmlBean.campo.label}"  size="50" maxlength="255" style="text-transform:none;">
-						</h:inputText>
-						<rich:message errorClass="error" for="nomeCampo" styleClass="message"/>
-					</dd>
-					
-					<dt><h:outputLabel value="Mascara" for="maskara" styleClass="labelNegrito"/></dt>
-					<dd>
-						<h:selectOneMenu id="maskara" value="#{xmlBean.campo.maskara}" required="true" style="width:100px">
-							<f:selectItem itemLabel="Númerico" itemValue="[0-9]+"/>
-							<f:selectItem itemLabel="CPF" itemValue="[0-9]{3}\."/>
-							<f:selectItem itemLabel="Númerico" itemValue="[0-9]+"/>
-			    		</h:selectOneMenu>
-			    		<rich:message errorClass="error" for="tipoCampo" styleClass="message"/>
-					</dd>
-					
-					<dt><h:outputLabel value="Tipo" for="tipoCampo" styleClass="labelNegrito"/></dt>
-					<dd>
-						<h:selectOneMenu id="tipoCampo" value="#{xmlBean.campo.tipo}" required="true" style="width:100px">
-							<f:selectItem itemLabel="Texto" itemValue="text"/>
-							<f:selectItem itemLabel="Inteiro" itemValue="integer"/>
-							<f:selectItem itemLabel="Float" itemValue="float"/>
-							<f:selectItem itemLabel="Data" itemValue="data"/>
-							<f:selectItem itemLabel="Select" itemValue="select"/>
-							<f:selectItem itemLabel="Boolean" itemValue="boolean"/>
-			    		</h:selectOneMenu>
-			    		<rich:message errorClass="error" for="tipoCampo" styleClass="message"/>
-					</dd>
-					
-					<dt><h:outputLabel value="Obrigatório" for="obrigatorio" styleClass="labelNegrito"/></dt>
-					<dd>
-						<h:selectOneMenu id="obrigatorio" value="#{xmlBean.campo.obrigatorio}" required="true" style="width:60px">
-							<f:selectItem itemLabel="Sim" itemValue="1"/>
-							<f:selectItem itemLabel="Não" itemValue="0"/>
-				    		</h:selectOneMenu>
-			    		<rich:message errorClass="error" for="obrigatorio" styleClass="message"/>
-					</dd>
-					
-					<h:commandLink action="#{xmlBean.adicionarCampo}" value="Adicionar" styleClass="novo" style="padding-left:20px">
-			      		<a4j:support event="onclick" reRender="dataTable2"/>
-			      	</h:commandLink>
-			    
-					<rich:dataTable id="dataTable2" value="#{xmlBean.campos}" var="campo" rows="10" rowKeyVar="index"
-		      		   rowClasses="even, odd" 
-			      		onRowMouseOver="jQuery(this).addClass('trHover')" 
-			      		onRowMouseOut="jQuery(this).removeClass('trHover')" width="100%">
-		
-		 		      	<c:if test="#{empty xmlBean.campos}">
-							<rich:column>
-								<f:facet name="header">Nenhum campo cadastrado.</f:facet>
-							</rich:column>
-						</c:if>
-		
-			      		<c:if test="#{not empty xmlBean.campos}" >
-		
-							<rich:column width="2%" style="text-align: center;" > 
-								<f:facet name="header"><h:outputText value="Nº" /></f:facet>
-								<h:outputText value="#{index+1}" style="color: black;"/>
-							</rich:column>
-		
-							<rich:column width="30%" style="text-align: left;" > 
-								<f:facet name="header"><h:outputText value="Identif." /></f:facet>
-								<h:outputText value="#{campo.name}" style="color: black;"/>
-							</rich:column>
-	
-							<rich:column width="30%" style="text-align: left;" > 
-								<f:facet name="header"><h:outputText value="Nome" /></f:facet>
-								<h:outputText value="#{campo.label}" style="color: black;"/>
-							</rich:column>
-							
-							<rich:column width="30%" style="text-align: left;" > 
-								<f:facet name="header"><h:outputText value="Tipo" /></f:facet>
-								<h:outputText value="#{campo.tipo}" style="color: black;"/>
-							</rich:column>
-		
-							<rich:column width="2%" style="text-align: center;">
-								<f:facet name="header"><h:outputText value="Excluir" /></f:facet>
-								<h:commandLink id="remove" styleClass="excluir"  action="#{xmlBean.removeCampo}" value="Excluir">
-									<f:setPropertyActionListener target="#{xmlBean.campo}" value="#{campo}"/>
-									<a4j:support event="oncomplete" reRender="paginaPrincipal"/>
-								</h:commandLink>
-							</rich:column>
-
-						</c:if>
-		      		</rich:dataTable>
-
-	    	</fieldset>
 
 
 		<h:commandButton value="Gravar XSD" action="#{xmlBean.downloadXsdFile}" styleClass="button">

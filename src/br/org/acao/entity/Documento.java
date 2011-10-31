@@ -39,6 +39,8 @@ public class Documento implements Serializable{
 	
 	private transient List<Indice> indices;
 	
+	private transient Campo tmp;
+	
 
 	public Integer getId() {
 		return id;
@@ -102,6 +104,14 @@ public class Documento implements Serializable{
 
 	public void setFormName(String formName) {
 		this.formName = formName;
+	}
+	
+	public Campo getTmp() {
+		return tmp;
+	}
+
+	public void setTmp(Campo tmp) {
+		this.tmp = tmp;
 	}
 
 	public int hashCode() {
