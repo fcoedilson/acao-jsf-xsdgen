@@ -1,0 +1,185 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/84/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util
+END
+Visitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/82/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/Visitor.java
+END
+ZipUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/76/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/ZipUtil.java
+END
+StatusRegistroSolicitacaoVeiculo.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/StatusRegistroSolicitacaoVeiculo.java
+END
+DownloadFileUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/DownloadFileUtil.java
+END
+GeoUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/82/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/GeoUtil.java
+END
+StatusVeiculo.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/29/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/StatusVeiculo.java
+END
+StatusAtendimentoAbastecimento.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/StatusAtendimentoAbastecimento.java
+END
+MapUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/MapUtil.java
+END
+DateUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/110/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/DateUtil.java
+END
+Constants.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/6/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/Constants.java
+END
+ColorUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/76/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/ColorUtil.java
+END
+SgfUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/101/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/SgfUtil.java
+END
+SecurityListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/SecurityListener.java
+END
+VeiculoDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/44/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/VeiculoDTO.java
+END
+Connetions.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/72/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/Connetions.java
+END
+ConnectOracle.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/59/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/ConnectOracle.java
+END
+GenerateDatabase.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/72/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/GenerateDatabase.java
+END
+JSFUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/JSFUtil.java
+END
+MailUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/MailUtil.java
+END
+IndexTableDecorator.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/76/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/IndexTableDecorator.java
+END
+Mail.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/Mail.java
+END
+StatusAbastecimento.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/95/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/StatusAbastecimento.java
+END
+StatusSolicitacaoVeiculo.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/StatusSolicitacaoVeiculo.java
+END
+StatusSolicitacaoLubrificante.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/StatusSolicitacaoLubrificante.java
+END
+ImageServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/ImageServlet.java
+END
+PropertiesUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/PropertiesUtil.java
+END
+VelocityUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/VelocityUtil.java
+END
+StatusManutencao.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/StatusManutencao.java
+END
+XmlUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/83/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/XmlUtil.java
+END
+RelatorioUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/util/RelatorioUtil.java
+END

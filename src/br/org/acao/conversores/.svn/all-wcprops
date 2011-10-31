@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores
+END
+PostoServicoConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/PostoServicoConverter.java
+END
+EnumConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/EnumConverter.java
+END
+UGConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/UGConverter.java
+END
+PGGeometryUserType.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/PGGeometryUserType.java
+END
+EntityConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/EntityConverter.java
+END
+ValorConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/ValorConverter.java
+END
+GeometryType.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/GeometryType.java
+END
+RoleConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/RoleConverter.java
+END
+PermissaoConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/PermissaoConverter.java
+END
+CombustivelConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/CombustivelConverter.java
+END
+TipoServicoConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/TipoServicoConverter.java
+END
+UAConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/UAConverter.java
+END
+PostoConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/conversores/PostoConverter.java
+END

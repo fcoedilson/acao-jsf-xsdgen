@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+ <session-factory name="">
+
+  <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+  <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/sigafrota</property>
+  <property name="hibernate.connection.username">sigafrota</property>
+  <property name="hibernate.connection.password">@2011</property>
+  <property name="hibernate.dialect">org.hibernatespatial.postgis.PostgisDialect</property>
+  <property name="hibernate.format_sql">true</property>
+  <property name="hibernate.show_sql">true</property>
+
+  <!--	  <property name="hibernate.hbm2ddl.auto">update</property>-->  
+  		<mapping class="br.org.sigafrota.entity.User"/>
+		<mapping class="br.org.sigafrota.entity.Pessoa"/>
+		<mapping class="br.org.sigafrota.entity.Posto"/>
+		<mapping class="br.org.sigafrota.entity.PostoServico"/>
+		<mapping class="br.org.sigafrota.entity.PostoServicoVeiculo"/>
+		<mapping class="br.org.sigafrota.entity.Role"/>
+		<mapping class="br.org.sigafrota.entity.Motorista"/>
+		<mapping class="br.org.sigafrota.entity.Permissao"/>
+		<mapping class="br.org.sigafrota.entity.SolicitacaoVeiculo"/>
+		<mapping class="br.org.sigafrota.entity.RegistroVeiculo"/>
+		<mapping class="br.org.sigafrota.entity.Infracao"/>
+		<mapping class="br.org.sigafrota.entity.Modelo"/>
+		<mapping class="br.org.sigafrota.entity.Marca"/>
+		<mapping class="br.org.sigafrota.entity.Multa"/>
+		<mapping class="br.org.sigafrota.entity.Especie"/>
+		<mapping class="br.org.sigafrota.entity.Veiculo"/>
+		<mapping class="br.org.sigafrota.entity.TipoServico"/>
+		<mapping class="br.org.sigafrota.entity.TipoCombustivel"/>
+		<mapping class="br.org.sigafrota.entity.Cota"/>
+		<mapping class="br.org.sigafrota.entity.DiarioBomba"/>
+		<mapping class="br.org.sigafrota.entity.Bomba"/>
+		<mapping class="br.org.sigafrota.entity.LogUsuario"/>
+		<mapping class="br.org.sigafrota.entity.UA"/>
+		<mapping class="br.org.sigafrota.entity.UG"/>
+		<mapping class="br.org.sigafrota.entity.NumeroMotor"/>
+		<mapping class="br.org.sigafrota.entity.Oficina"/>
+		<mapping class="br.org.sigafrota.entity.RequisicaoManutencao"/>
+		<mapping class="br.org.sigafrota.entity.ItemRequisicao"/>
+		<mapping class="br.org.sigafrota.entity.SolicitacaoLubrificante"/>
+		<mapping class="br.org.sigafrota.entity.Abastecimento"/>
+		<mapping class="br.org.sigafrota.entity.AtendimentoAbastecimento"/>
+		<mapping class="br.org.sigafrota.entity.Parametro"/>
+		<mapping class="br.org.sigafrota.entity.Transmissao"/>
+		<mapping class="br.org.sigafrota.entity.Ponto"/>
+		<mapping class="br.org.sigafrota.entity.Area"/>
+		<mapping class="br.org.sigafrota.entity.Message"/>
+		<mapping class="br.org.sigafrota.entity.Page"/>
+		<mapping class="br.org.sigafrota.entity.Rastreador"/>
+
+ </session-factory>
+
+</hibernate-configuration>

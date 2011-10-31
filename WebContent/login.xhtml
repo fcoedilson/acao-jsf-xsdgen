@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+
+	<head>
+		<title>XSD</title>
+		<link rel="shortcut icon" href="#{msg['sistema.label.imageFavicon']}"/>
+		<a4j:loadStyle src="css/global.css" />
+		<a4j:loadStyle src="css/estilo.css" />
+	</head>
+
+<body>
+
+<h:form id="paginaPrincipal" prependId="false">
+
+	<div id="main">
+		
+		<div id="cadastro">
+			
+			<h2>Plataforma Ação - Gerador de XSD</h2>
+			
+			
+			<fieldset style="margin-bottom:20px">
+
+			    <legend>Header do XSD</legend>	
+				<dd>
+					<h:outputLabel value="Target Namespace" for="id" styleClass="labelNegrito"/>
+					<h:inputText id="tns" value="#{xmlBean.targetNamespace}" required="true"  size="60" maxlength="255">
+					</h:inputText>
+					<rich:message errorClass="error" for="tns" styleClass="message"/>
+				</dd>
+
+	    	</fieldset>
+			
+			<fieldset style="margin-bottom:20px">
+
+			    <legend>Informações do XSD</legend>	
+			    
+	
+					<dt><h:outputLabel value="Identificador" for="id" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:inputText id="id" value="#{xmlBean.id}" required="true"  size="40" maxlength="255">
+						</h:inputText>
+						<rich:message errorClass="error" for="id" styleClass="message"/>
+					</dd>
+			  		
+			  		<dt><h:outputLabel value="Título" for="titulo" 	styleClass="labelNegrito"/></dt>	
+			  		<dd>	  	
+						<h:inputText id="titulo" value="#{xmlBean.titulo}" required="true"  size="50" maxlength="10">
+						</h:inputText>
+						<rich:message errorClass="error" for="titulo" styleClass="message"/>
+					</dd>
+				
+					<dt><h:outputLabel value="Classificação" for="classificacao" 	styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:inputText id="classificacao" value="#{xmlBean.classificacao}" required="true"  size="50" maxlength="10">
+						</h:inputText>
+						<rich:message errorClass="error" for="classificacao" styleClass="message"/>
+					</dd>
+
+	    	</fieldset>
+	    	
+			<fieldset>
+			
+				<legend>Indices do XSD</legend>
+				<h:outputLabel value="Key" for="key" styleClass="labelNegrito"/>
+				<h:inputText id="key" value="#{xmlBean.indice.key}" required="true"  size="30" maxlength="10"/>
+				
+				<h:outputLabel value="Path" for="path" styleClass="labelNegrito"/>
+				<h:inputText id="path" value="#{xmlBean.indice.path}" required="true"  size="30" maxlength="10"/>
+				
+				<h:commandLink action="#{xmlBean.adicionarIndice}" value="Adicionar" styleClass="novo" style="padding-left:20px">
+		      		<a4j:support event="onclick" reRender="paginaPrincipal"/>
+		      	</h:commandLink>
+				
+				<rich:dataTable id="dataTable1" value="#{xmlBean.indices}" var="indice" rows="10" rowKeyVar="index"
+	      		   rowClasses="even, odd" 
+		      		onRowMouseOver="jQuery(this).addClass('trHover')" 
+		      		onRowMouseOut="jQuery(this).removeClass('trHover')" width="100%">
+	
+	 		      	<c:if test="#{empty xmlBean.indices}">
+						<rich:column>
+							<f:facet name="header">Nenhum indice cadastrado.</f:facet>
+						</rich:column>
+					</c:if>
+	
+		      		<c:if test="#{not empty xmlBean.indices}" >
+	
+						<rich:column width="2%" style="text-align: center;" > 
+							<f:facet name="header"><h:outputText value="Nº" /></f:facet>
+							<h:outputText value="#{index+1}" style="color: black;"/>
+						</rich:column>
+	
+						<rich:column width="60%" style="text-align: left;" > 
+							<f:facet name="header"><h:outputText value="Key" /></f:facet>
+							<h:outputText value="#{indice.key}" style="color: black;"/>
+						</rich:column>
+	
+						<rich:column width="2%" style="text-align: center;">
+							<f:facet name="header"><h:outputText value="Excluir" /></f:facet>
+							<h:commandLink id="remove" styleClass="excluir"  action="#{xmlBean.removeIndice}" value="Excluir">
+								<f:setPropertyActionListener target="#{xmlBean.indice}" value="#{indice}"/>
+								<a4j:support event="oncomplete" reRender="paginaPrincipal"/>
+							</h:commandLink>
+						</rich:column>
+
+					</c:if>
+	      		</rich:dataTable>
+			</fieldset>
+	    	
+			<fieldset style="margin-bottom:20px">
+
+			    <legend>Campos do XSD</legend>
+			    
+					<dt><h:outputLabel value="Identificador" for="idcampo" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:inputText id="idcampo" value="#{xmlBean.campo.id}" required="true"  size="30" maxlength="255">
+						</h:inputText>
+						<rich:message errorClass="error" for="idcampo" styleClass="message"/>
+					</dd>
+					
+					<dt><h:outputLabel value="Nome" for="nomeCampo" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:inputText id="nomeCampo" value="#{xmlBean.campo.label}" required="true"  size="50" maxlength="255">
+						</h:inputText>
+						<rich:message errorClass="error" for="nomeCampo" styleClass="message"/>
+					</dd>
+					
+					<dt><h:outputLabel value="Tipo" for="tipoCampo" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:selectOneMenu id="tipoCampo" value="#{xmlBean.campo.tipo}" required="true" style="width:100px">
+							<f:selectItem itemLabel="Texto" itemValue="texto"/>
+							<f:selectItem itemLabel="Inteiro" itemValue="texto"/>
+							<f:selectItem itemLabel="Float" itemValue="texto"/>
+							<f:selectItem itemLabel="Data" itemValue="texto"/>
+							<f:selectItem itemLabel="Select" itemValue="texto"/>
+							<f:selectItem itemLabel="Boolean" itemValue="texto"/>
+			    		</h:selectOneMenu>
+			    		<rich:message errorClass="error" for="tipoCampo" styleClass="message"/>
+					</dd>
+			    
+					<rich:dataTable id="dataTable2" value="#{xmlBean.campos}" var="campo" rows="10" rowKeyVar="index"
+		      		   rowClasses="even, odd" 
+			      		onRowMouseOver="jQuery(this).addClass('trHover')" 
+			      		onRowMouseOut="jQuery(this).removeClass('trHover')" width="100%">
+		
+		 		      	<c:if test="#{empty xmlBean.campos}">
+							<rich:column>
+								<f:facet name="header">Nenhum indice cadastrado.</f:facet>
+							</rich:column>
+						</c:if>
+		
+			      		<c:if test="#{not empty xmlBean.campos}" >
+		
+							<rich:column width="2%" style="text-align: center;" > 
+								<f:facet name="header"><h:outputText value="Nº" /></f:facet>
+								<h:outputText value="#{index+1}" style="color: black;"/>
+							</rich:column>
+		
+							<rich:column width="30%" style="text-align: left;" > 
+								<f:facet name="header"><h:outputText value="Id" /></f:facet>
+								<h:outputText value="#{indice.id}" style="color: black;"/>
+							</rich:column>
+	
+							<rich:column width="30%" style="text-align: left;" > 
+								<f:facet name="header"><h:outputText value="Label" /></f:facet>
+								<h:outputText value="#{indice.label}" style="color: black;"/>
+							</rich:column>
+							
+							<rich:column width="30%" style="text-align: left;" > 
+								<f:facet name="header"><h:outputText value="Tipo" /></f:facet>
+								<h:outputText value="#{indice.tipo}" style="color: black;"/>
+							</rich:column>
+		
+							<rich:column width="2%" style="text-align: center;">
+								<f:facet name="header"><h:outputText value="Excluir" /></f:facet>
+								<h:commandLink id="remove" styleClass="excluir"  action="#{xmlBean.removeCampo}" value="Excluir">
+									<f:setPropertyActionListener target="#{xmlBean.campo}" value="#{campo}"/>
+									<a4j:support event="oncomplete" reRender="paginaPrincipal"/>
+								</h:commandLink>
+							</rich:column>
+							
+							<f:facet name="footer">
+								<rich:datascroller renderIfSinglePage="false" for="dataTable"/>
+		           	 		</f:facet>
+						</c:if>
+		      		</rich:dataTable>
+
+
+	    	</fieldset>
+	    	
+		</div>
+		
+	</div>		
+
+</h:form>
+
+</body>
+
+</html>
+
+
+	
+			
+
+
+
+

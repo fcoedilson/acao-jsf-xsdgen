@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/89/trunk/Sgfgoogle/src
+END
+quartz.properties
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/quartz.properties
+END
+messages_pt_BR.properties
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/94/trunk/Sgfgoogle/src/messages_pt_BR.properties
+END
+velocity.properties
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/velocity.properties
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/82/trunk/Sgfgoogle/src/log4j.properties
+END
+messages_en_US.properties
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/94/trunk/Sgfgoogle/src/messages_en_US.properties
+END
+sgf_relatorios.properties
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/84/trunk/Sgfgoogle/src/sgf_relatorios.properties
+END

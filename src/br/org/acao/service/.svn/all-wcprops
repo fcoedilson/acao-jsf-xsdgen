@@ -1,0 +1,263 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/88/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service
+END
+AbastecimentoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/109/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/AbastecimentoService.java
+END
+ModeloService.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/ModeloService.java
+END
+CustomUserDetailsService.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/51/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/CustomUserDetailsService.java
+END
+BombaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/BombaService.java
+END
+SolicitacaoVeiculoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/85/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/SolicitacaoVeiculoService.java
+END
+SolicitacaoLubrificanteService.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/88/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/SolicitacaoLubrificanteService.java
+END
+InfracaoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/InfracaoService.java
+END
+RegistroVeiculoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/RegistroVeiculoService.java
+END
+PostoServicoVeiculoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/PostoServicoVeiculoService.java
+END
+UsuarioService.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/53/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/UsuarioService.java
+END
+LogUsuarioService.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/LogUsuarioService.java
+END
+ParametroService.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/30/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/ParametroService.java
+END
+RoleService.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/RoleService.java
+END
+VeiculoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/102/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/VeiculoService.java
+END
+DiarioBombaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/44/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/DiarioBombaService.java
+END
+OficinaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/OficinaService.java
+END
+BaseService.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/94/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/BaseService.java
+END
+PageService.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/PageService.java
+END
+EspecieService.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/EspecieService.java
+END
+RequisicaoManutencaoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/68/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/RequisicaoManutencaoService.java
+END
+AutorizacaoAbastecimentoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/AutorizacaoAbastecimentoService.java
+END
+MotoristaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/MotoristaService.java
+END
+MultaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/MultaService.java
+END
+MarcaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/MarcaService.java
+END
+ItemRequisicaoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/ItemRequisicaoService.java
+END
+MessageService.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/MessageService.java
+END
+NumeroMotorService.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/NumeroMotorService.java
+END
+ArenaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/83/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/ArenaService.java
+END
+CotaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/96/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/CotaService.java
+END
+TipoCombustivelService.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/TipoCombustivelService.java
+END
+PessoaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/PessoaService.java
+END
+CustomAuthenticationProcessingFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/36/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/CustomAuthenticationProcessingFilter.java
+END
+PostoServicoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/PostoServicoService.java
+END
+PontoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/82/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/PontoService.java
+END
+PermissaoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/PermissaoService.java
+END
+TransmissaoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/94/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/TransmissaoService.java
+END
+PostoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/PostoService.java
+END
+UAService.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/38/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/UAService.java
+END
+TipoServicoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/TipoServicoService.java
+END
+RastreadorService.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/101/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/RastreadorService.java
+END
+AtendimentoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/111/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/AtendimentoService.java
+END
+AreaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/3/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/AreaService.java
+END
+UGService.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/39/trunk/Sgfgoogle/src/br/gov/ce/fortaleza/cti/sgf/service/UGService.java
+END

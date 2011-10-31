@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/sgf">
+	<Resource 
+		name="jdbc/sgf"
+		auth="Container"
+		type="javax.sql.DataSource"
+		username="sgf"
+		password="sgf"
+		driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://localhost:5432/pmf_desv"/>
+	
+	<Resource
+		name="jdbc/patrimonio"
+		auth="Container"
+		type="javax.sql.DataSource"
+		username="asiweb"
+		password="asiweb"
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		url="jdbc:oracle:thin:@172.30.116.22:1521:pmf"/>
+</Context>

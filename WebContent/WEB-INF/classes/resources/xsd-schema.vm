@@ -1,0 +1,56 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://schemas.fortaleza.ce.gov.br/acao/${documento.targetNamespace}.xsd"
+    xmlns:class="http://schemas.fortaleza.ce.gov.br/acao/classificacao.xsd"
+    xmlns:idx="http://schemas.fortaleza.ce.gov.br/acao/indexhint.xsd"
+    xmlns:xsdext="http://schemas.fortaleza.ce.gov.br/xsdform/extensions.xsd"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    targetNamespace="http://schemas.fortaleza.ce.gov.br/acao/${documento.targetNamespace}.xsd"
+    elementFormDefault="qualified">
+
+    <xs:element name="${documento.formName}" type="${documento.formName}">
+        <xs:annotation>
+            <xs:appinfo>
+                <xhtml:label>${documento.titulo}</xhtml:label>
+                <class:classificacoes>
+                    <class:classificacao>${documento.classificacao}</class:classificacao>
+                </class:classificacoes>
+                <idx:index>
+#foreach($index in $documento.indices)
+          <idx:hint key="${index.key}" xpath="${index.path}"/>
+#end
+                </idx:index>
+            </xs:appinfo>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="${documento.formName}">
+        <xs:sequence>
+#foreach($field in $documento.campos)
+#if($field.tipo == 'text')
+        <xs:element name="${field.name}" minOccurs="${field.obrigatorio}">
+            <xs:annotation>
+                <xs:appinfo>
+                    <xhtml:label>${field.label}</xhtml:label>
+                </xs:appinfo>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:maxLength value="255"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:element>
+#end
+#if($field.tipo == 'integer')
+        <xs:element name="${field.name}" type="xs:integer" minOccurs="${field.obrigatorio}">
+            <xs:annotation>
+                <xs:appinfo>
+                    <xhtml:label>${field.label}</xhtml:label>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:element>
+#end
+#end
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
