@@ -31,13 +31,10 @@ public class EntityConverter implements Converter, Serializable {
 		return null;
 	}
 
-	public String getAsString(FacesContext ctx, UIComponent component,
-			Object value) {
+	public String getAsString(FacesContext ctx, UIComponent component, Object value) {
 
 		if (value != null && !"".equals(value)) {
-
 			Object entity = (Object) value;
-
 			this.addAttribute(component, entity);
 			
 			if(loadIdentifier(entity).startsWith("0")){
@@ -49,13 +46,14 @@ public class EntityConverter implements Converter, Serializable {
 				}
 			}
 		}
-
 		return (String) value;
 	}
 
 	protected void addAttribute(UIComponent component, Object object) {
 		String key = loadIdentifier(object);
-		this.getAttributesFrom(component).put(key, object);
+		if(key != null){
+			this.getAttributesFrom(component).put(key, object);
+		}
 	}
 
 	protected Map<String, Object> getAttributesFrom(UIComponent component) {

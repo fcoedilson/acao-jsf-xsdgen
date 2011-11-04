@@ -17,7 +17,7 @@
                 </class:classificacoes>
                 <idx:index>
 #foreach($index in $documento.indices)
-          <idx:hint key="${index.key}" xpath="${index.path}"/>
+        <idx:hint key="${index.key}" xpath="${index.path}"/>
 #end
                 </idx:index>
             </xs:appinfo>
@@ -28,11 +28,6 @@
         <xs:sequence>
 #foreach($field in $documento.campos)
 
-
-#if($field.campos > 0)
- 
- 
-#end
 
 
 #if($field.tipo == 'text')
@@ -57,6 +52,32 @@
                 </xs:appinfo>
             </xs:annotation>
         </xs:element>
+#end
+#foreach($field2 in $field.campos)
+
+#if($field2.tipo == 'text')
+        <xs:element name="${field2.name}" minOccurs="${field2.obrigatorio}">
+            <xs:annotation>
+                <xs:appinfo>
+                    <xhtml:label>${field2.label}</xhtml:label>
+                </xs:appinfo>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:maxLength value="255"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:element>
+#end
+#if($field2.tipo == 'integer')
+        <xs:element name="${field2.name}" type="xs:integer" minOccurs="${field2.obrigatorio}">
+            <xs:annotation>
+                <xs:appinfo>
+                    <xhtml:label>${field2.label}</xhtml:label>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:element>
+#end
 #end
 #end
         </xs:sequence>

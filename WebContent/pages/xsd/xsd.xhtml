@@ -8,11 +8,22 @@
       xmlns:a4j="http://richfaces.org/a4j"
      xmlns:c="http://java.sun.com/jstl/core"
      xmlns:t="http://myfaces.apache.org/tomahawk">
-      
-     
+
 	<div id="cadastro">
 			
 			<h2>Plataforma Ação - Gerador de XSD</h2>
+			
+			<fieldset style="margin-bottom:20px">
+
+			    <legend>Arquivo</legend>	
+				<dd>
+					<h:outputLabel value="Nome" for="id" styleClass="labelNegrito"/>
+					<h:inputText id="nomexsd" value="#{xmlBean.nomeArquivo}" required="true"  size="60" maxlength="255" style="text-transform:none;">
+					</h:inputText>
+					<rich:message errorClass="error" for="nomexsd" styleClass="message"/>
+				</dd>
+
+	    	</fieldset>
 			
 			<fieldset style="margin-bottom:20px">
 
@@ -28,16 +39,16 @@
 			
 			<fieldset style="margin-bottom:20px">
 
-			    <legend>Informações do XSD</legend>	
+			    <legend>Documento</legend>	
 			    
-					<dt><h:outputLabel value="Form ID" for="id" styleClass="labelNegrito"/></dt>
+					<dt><h:outputLabel value="Name" for="id" styleClass="labelNegrito"/></dt>
 					<dd>
 						<h:inputText id="id" value="#{xmlBean.formName}" required="true"  size="40" maxlength="255" style="text-transform:none;">
 						</h:inputText>
 						<rich:message errorClass="error" for="id" styleClass="message"/>
 					</dd>
 
-			  		<dt><h:outputLabel value="Nome" for="titulo" 	styleClass="labelNegrito"/></dt>	
+			  		<dt><h:outputLabel value="Label" for="titulo" 	styleClass="labelNegrito"/></dt>	
 			  		<dd>	  	
 						<h:inputText id="titulo" value="#{xmlBean.titulo}" required="true"  size="50" maxlength="100" style="text-transform:none;">
 						</h:inputText>
@@ -55,16 +66,21 @@
 
 			<fieldset style="margin-bottom:20px">
 
-			    <legend>Campos do XSD</legend>
+			 	<legend>Inclusão de campos</legend>
 
-					<dt><h:outputLabel value="Campo ID" for="idcampo" styleClass="labelNegrito"/></dt>
+				
+				<fieldset style="margin-bottom:20px">
+				
+					 <legend>Campo</legend>
+
+					<dt><h:outputLabel value="Name" for="idcampo" styleClass="labelNegrito"/></dt>
 					<dd>
 						<h:inputText id="idcampo" value="#{xmlBean.campo.name}"  size="30" maxlength="255" style="text-transform:none;">
 						</h:inputText>
 						<rich:message errorClass="error" for="idcampo" styleClass="message"/>
 					</dd>
 					
-					<dt><h:outputLabel value="Nome" for="nomeCampo" styleClass="labelNegrito"/></dt>
+					<dt><h:outputLabel value="Label" for="nomeCampo" styleClass="labelNegrito"/></dt>
 					<dd>
 						<h:inputText id="nomeCampo" value="#{xmlBean.campo.label}"  size="40" maxlength="255" style="text-transform:none;">
 						</h:inputText>
@@ -94,7 +110,7 @@
 			    		</h:selectOneMenu>
 			    		<rich:message errorClass="error" for="tipoCampo" styleClass="message"/>
 					</dd>
-					
+
 					<dt><h:outputLabel value="Obrigatório" for="obrigatorio" styleClass="labelNegrito"/></dt>
 					<dd>
 						<h:selectOneMenu id="obrigatorio" value="#{xmlBean.campo.obrigatorio}" style="width:60px">
@@ -103,25 +119,30 @@
 				    		</h:selectOneMenu>
 			    		<rich:message errorClass="error" for="obrigatorio" styleClass="message"/>
 					</dd>
-					
-					
-					<c:if test="#{xmlBean.campoStatus}">
-					
-						<dt><h:outputLabel value="Incluir como subnível de" for="campoList" styleClass="labelNegrito"/></dt>
-						<dd>
-							<h:selectOneMenu id="campoList" value="#{xmlBean.nivelCampo}" style="width:180px" converter="campoConverter">
-								<f:selectItem itemLabel="Selecione ..." itemValue=""/>
-			    				<t:selectItems value="#{xmlBean.campos}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>
-				    		</h:selectOneMenu>
-				    		<rich:message errorClass="error" for="campoList" styleClass="message"/>
-						</dd>
-					</c:if>
 
-					<h:commandLink action="#{xmlBean.adicionarCampo}" value="Adicionar" styleClass="novo" style="padding-left:20px">
-			      		<a4j:support event="onclick" reRender="dataTable2"/>
+					<dt><h:outputLabel value="SubNível" for="subnivel" styleClass="labelNegrito"/></dt>
+					<dd>
+
+						<h:inputText id="subnivel" value="#{xmlBean.campo.labelSubnivel}"  size="40" maxlength="255" style="text-transform:none;"/>
+
+						<h:selectOneMenu id="subnivelList" value="#{xmlBean.campo.labelSubnivel}" rendered="#{xmlBean.subNiveisStatus and false}" style="width:180px" converter="campoConverter">
+							<f:selectItem itemLabel="Selecione ..." itemValue=""/>
+		    				<t:selectItems value="#{xmlBean.subNivelList}" var="g" itemValue="#{g}" itemLabel="#{g}"/>
+		    				<a4j:support event="onchange" action="#{xmlBean.populate}"/>
+			    		</h:selectOneMenu>
+						<rich:message errorClass="error" for="subnivelList" styleClass="message" rendered="false"/>
+					</dd>
+
+					<h:commandLink action="#{xmlBean.adicionarCampo}" value="Adicionar" reRender="panelSubNivel" styleClass="novo" style="padding-left:20px">
+			      		<a4j:support event="onclick" reRender="dataTable2, subnivelList" />
 			      	</h:commandLink>
 			    
-					<rich:dataTable id="dataTable2" value="#{xmlBean.campos}" var="campo" rows="10" rowKeyVar="index"
+		      	</fieldset>
+		      	
+		      	<fieldset>
+		      		
+					<legend>Campos incluídos</legend>		      	
+		      		<rich:dataTable id="dataTable2" value="#{xmlBean.campos}" var="campo" rows="10" rowKeyVar="index"
 		      		   rowClasses="even, odd" 
 			      		onRowMouseOver="jQuery(this).addClass('trHover')" 
 			      		onRowMouseOut="jQuery(this).removeClass('trHover')" width="100%">
@@ -140,12 +161,12 @@
 							</rich:column>
 		
 							<rich:column width="20%" style="text-align: left;" > 
-								<f:facet name="header"><h:outputText value="Identif." /></f:facet>
+								<f:facet name="header"><h:outputText value="Name" /></f:facet>
 								<h:outputText value="#{campo.name}" style="color: black;"/>
 							</rich:column>
 	
 							<rich:column width="20%" style="text-align: left;" > 
-								<f:facet name="header"><h:outputText value="Nome" /></f:facet>
+								<f:facet name="header"><h:outputText value="Label" /></f:facet>
 								<h:outputText value="#{campo.label}" style="color: black;"/>
 							</rich:column>
 							
@@ -153,10 +174,15 @@
 								<f:facet name="header"><h:outputText value="Tipo" /></f:facet>
 								<h:outputText value="#{campo.tipo}" style="color: black;"/>
 							</rich:column>
+
+							<rich:column width="20%" style="text-align: left;" > 
+								<f:facet name="header"><h:outputText value="Maskara" /></f:facet>
+								<h:outputText value="#{campo.maskara}" style="color: black;"/>
+							</rich:column>
 							
 							<rich:column width="40%" style="text-align: left;" > 
-								<f:facet name="header"><h:outputText value="Mask" /></f:facet>
-								<h:outputText value="#{campo.maskara}" style="color: black;"/>
+								<f:facet name="header"><h:outputText value="Subnivel" /></f:facet>
+								<h:outputText value="#{campo.labelSubnivel}" style="color: black;"/>
 							</rich:column>
 		
 							<rich:column width="2%" style="text-align: center;">
@@ -169,12 +195,15 @@
 
 						</c:if>
 		      		</rich:dataTable>
+		      	
+		      	
+		      	</fieldset>
 
 	    	</fieldset>
 	    	
 			<fieldset>
 			
-				<legend>Indices do XSD</legend>
+				<legend>Indices</legend>
 				<h:outputLabel value="Key" for="key" styleClass="labelNegrito"/>
 				<h:inputText id="key" value="#{xmlBean.indice.key}"  size="30" maxlength="100" style="text-transform:none;"/>
 				

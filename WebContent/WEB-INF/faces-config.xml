@@ -14,6 +14,11 @@
 		<converter-class>br.org.acao.conversores.CampoConverter</converter-class>
 	</converter>
 	
+	<converter>
+		<converter-id>grupoConverter</converter-id>
+		<converter-class>br.org.acao.conversores.GrupoConverter</converter-class>
+	</converter>
+	
 	<application>
 		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
 		<message-bundle>messages</message-bundle>

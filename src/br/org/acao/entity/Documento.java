@@ -14,7 +14,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 
-
 @Entity
 @Table(name = "documento", schema = "acao-xsd")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -22,33 +21,17 @@ public class Documento implements Serializable{
 	
 	private static final long serialVersionUID = 1182756761912025569L;
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", nullable = false)
+	@Column(name = "ID", nullable = false)
 	private Integer id;
-
 	private String formName;
-	
-	private  transient String titulo;
-	
-	private  transient String classificacao;
-	
-	private  transient String targetNamespace = "";
-	
+	private transient String titulo;
+	private transient String classificacao;
+	private transient String targetNamespace = "";
 	private transient List<Campo> campos;
-	
 	private transient List<Indice> indices;
-	
-	private transient Campo tmp;
-	
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return formName;
@@ -105,18 +88,18 @@ public class Documento implements Serializable{
 	public void setFormName(String formName) {
 		this.formName = formName;
 	}
-	
-	public Campo getTmp() {
-		return tmp;
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setTmp(Campo tmp) {
-		this.tmp = tmp;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public int hashCode() {
 		int result = 1;
-		result = 31 * result + ((id == null) ? 0 : id.hashCode());
+		result = 31 * result + ((formName == null) ? 0 : formName.hashCode());
 		return result;
 	}
 
@@ -128,7 +111,7 @@ public class Documento implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Documento other = (Documento) obj;
-		return ((id == null && other.id == null) || (id != null && id.equals(other.id)));
+		return ((formName == null && other.formName == null) || (formName != null && formName.equals(other.formName)));
 	}
 
 }

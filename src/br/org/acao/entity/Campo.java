@@ -5,15 +5,16 @@ import java.util.List;
 
 public class Campo implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
+	private Integer id;
 	private String name;
 	private String label;
 	private String tipo;
 	private String maskara;
 	private int obrigatorio;
+	private String nomeSubnivel;
+	private String labelSubnivel;
 	
 	private List<Campo> campos;
 	
@@ -65,9 +66,33 @@ public class Campo implements Serializable{
 		this.maskara = maskara;
 	}
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNomeSubnivel() {
+		return nomeSubnivel;
+	}
+
+	public void setNomeSubnivel(String nomeSubnivel) {
+		this.nomeSubnivel = nomeSubnivel;
+	}
+
+	public String getLabelSubnivel() {
+		return labelSubnivel;
+	}
+
+	public void setLabelSubnivel(String labelSubnivel) {
+		this.labelSubnivel = labelSubnivel;
+	}
+
 	public int hashCode() {
 		int result = 1;
-		result = 31 * result + ((name == null) ? 0 : name.hashCode());
+		result = 31 * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -79,6 +104,6 @@ public class Campo implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Campo other = (Campo) obj;
-		return ((name == null && other.name == null) || (name != null && name.equals(other.name)));
+		return ((id == null && other.id == null) || (id != null && id.equals(other.id)));
 	}
 }
