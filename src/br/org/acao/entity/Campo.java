@@ -15,6 +15,9 @@ public class Campo implements Serializable{
 	private int obrigatorio;
 	private String nomeSubnivel;
 	private String labelSubnivel;
+	private String autocompleteEngine;
+	private String autocompleteService;
+	private List<String> itens;
 	
 	private List<Campo> campos;
 	
@@ -88,6 +91,30 @@ public class Campo implements Serializable{
 
 	public void setLabelSubnivel(String labelSubnivel) {
 		this.labelSubnivel = labelSubnivel;
+	}
+	
+	public String getAutocompleteEngine() {
+		return autocompleteEngine;
+	}
+
+	public void setAutocompleteEngine(String autocompleteEngine) {
+		this.autocompleteEngine = autocompleteEngine;
+	}
+
+	public String getAutocompleteService() {
+		return autocompleteService;
+	}
+
+	public void setAutocompleteService(String autocompleteService) {
+		this.autocompleteService = autocompleteService;
+	}
+
+	public List<String> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<String> itens) {
+		this.itens = itens;
 	}
 
 	public int hashCode() {

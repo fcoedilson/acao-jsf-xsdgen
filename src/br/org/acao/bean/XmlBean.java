@@ -39,6 +39,9 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 	private List<Indice> indices = new ArrayList<Indice>();
 	private List<Campo> campos  = new ArrayList<Campo>();
 	private boolean incluirGrupo = false;
+	private boolean autocomplete;
+	private boolean select;
+	private String itemCampo;
 	
 	private Map<String, List<Campo>> subNivelMap = new HashMap<String, List<Campo>>();
 	
@@ -88,6 +91,10 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 		setCurrentBean(currentBeanName());
 		return SUCCESS;
 	}
+
+	/*
+	 * adicionar um item à lista de itens do campo
+	 */
 
 	public String adicionarIndice(){
 		this.indices.add(this.indice);
@@ -140,6 +147,37 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 		this.campo = new Campo();
 		return SUCCESS;
 	}
+	/**
+	 * Verifica o tipo do campo, caso seja autocomplete ou select, redenderiza itens adicionais na tela
+	 * @return
+	 */
+	public String verificarTipoCampo(){
+		
+		if(this.campo.getTipo() != null){
+			if(this.campo.getTipo().equals("select")){
+				this.select = true;
+				return SUCCESS;
+			} else if(this.campo.getTipo().equals("autocomplete")){
+				this.select = false;
+				this.autocomplete = true;
+				return SUCCESS;
+			}
+		}
+		this.select = false;
+		return SUCCESS;
+	}
+	
+	public String adicionarItemCampo(){
+		if(this.campo.getItens() != null){
+			this.campo.getItens().add(this.itemCampo);
+		} else {
+			this.campo.setItens(new ArrayList<String>());
+			this.campo.getItens().add(this.itemCampo);
+		}
+		this.itemCampo = null;
+		this.select = false;
+		return SUCCESS;
+	}
 
 	/*
 	 * usa o framework velocity para geração do arquivo XSD
@@ -153,16 +191,22 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 		documento.setClassificacao(this.classificacao);
 		documento.setIndices(this.indices);		
 		List<SubNivel> subniveis = new ArrayList<SubNivel>();
+		List<SubNivel> subniveis2 = new ArrayList<SubNivel>();
 		
 		for (String sub : subNivelMap.keySet()) {
 			SubNivel novo = new SubNivel();
 			List<Campo> campos = subNivelMap.get(sub);
-			novo.setNome(campos.get(0).getNomeSubnivel());
+			novo.setNome(campos.get(0).getNomeSubnivel().replace(" ", "").toLowerCase());
 			novo.setLabel(campos.get(0).getLabelSubnivel());
 			novo.setCampos(campos);
 			subniveis.add(novo);
 		}
-		byte[] bytes = VelocityUtil.merge("template-schema.vm", new String[]{"documento", "subniveis"}, new Object[]{documento, subniveis});
+
+		for (int i = subniveis.size() - 1 ; i > 0; i--) {
+			subniveis2.add(subniveis.get(i));
+		}
+		
+		byte[] bytes = VelocityUtil.merge("template-schema.vm", new String[]{"documento", "subniveis"}, new Object[]{documento, subniveis2});
 		return DownloadFileUtil.downloadFile(bytes, this.nomeArquivo + ".xsd", "application/text");
 	}
 	
@@ -267,6 +311,29 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 		this.incluirGrupo = incluirGrupo;
 	}
 
+	public boolean isAutocomplete() {
+		return autocomplete;
+	}
+
+	public void setAutocomplete(boolean autocomplete) {
+		this.autocomplete = autocomplete;
+	}
+
+	public boolean isSelect() {
+		return select;
+	}
+
+	public void setSelect(boolean select) {
+		this.select = select;
+	}
+	
+	public String getItemCampo() {
+		return itemCampo;
+	}
+
+	public void setItemCampo(String itemCampo) {
+		this.itemCampo = itemCampo;
+	}
 
 	@Override
 	protected BaseService<Integer, Documento> retrieveEntityService() {
