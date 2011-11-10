@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+
+
+		<h:outputLabel value="Key" for="key" styleClass="labelNegrito"/>
+		<h:inputText id="key" value="#{xmlBean.indice.key}"  size="30" maxlength="100" style="text-transform:none;"/>
+		
+		<h:outputLabel value="Path" for="path" styleClass="labelNegrito"/>
+		<h:inputText id="path" value="#{xmlBean.indice.path}"  size="30" maxlength="100" style="text-transform:none;"/>
+		
+		<h:commandLink action="#{xmlBean.adicionarIndice}" value="Adicionar" styleClass="novo" style="padding-left:20px">
+      		<a4j:support event="onclick" reRender="dataTable1"/>
+      	</h:commandLink>
+		
+		<rich:dataTable id="dataTable1" value="#{xmlBean.indices}" var="indice" rows="10" rowKeyVar="index"
+     		   rowClasses="even, odd" 
+      		onRowMouseOver="jQuery(this).addClass('trHover')" 
+      		onRowMouseOut="jQuery(this).removeClass('trHover')" width="100%">
+
+		      	<c:if test="#{empty xmlBean.indices}">
+				<rich:column>
+					<f:facet name="header">Nenhum indice cadastrado.</f:facet>
+				</rich:column>
+			</c:if>
+
+      		<c:if test="#{not empty xmlBean.indices}" >
+
+				<rich:column width="2%" style="text-align: center;" > 
+					<f:facet name="header"><h:outputText value="Nº" /></f:facet>
+					<h:outputText value="#{index+1}" style="color: black;"/>
+				</rich:column>
+
+				<rich:column width="60%" style="text-align: left;" > 
+					<f:facet name="header"><h:outputText value="Key" /></f:facet>
+					<h:outputText value="#{indice.key}" style="color: black;"/>
+				</rich:column>
+				
+				<rich:column width="60%" style="text-align: left;" > 
+					<f:facet name="header"><h:outputText value="Path" /></f:facet>
+					<h:outputText value="#{indice.path}" style="color: black;"/>
+				</rich:column>
+
+				<rich:column width="2%" style="text-align: center;">
+					<f:facet name="header"><h:outputText value="Excluir" /></f:facet>
+					<h:commandLink id="remove" styleClass="excluir"  action="#{xmlBean.removeIndice}" value="Excluir">
+						<f:setPropertyActionListener target="#{xmlBean.indice}" value="#{indice}"/>
+						<a4j:support event="oncomplete" reRender="dataTable1"/>
+					</h:commandLink>
+				</rich:column>
+
+			</c:if>
+     		</rich:dataTable>
+	      		
+</ui:composition>	      		

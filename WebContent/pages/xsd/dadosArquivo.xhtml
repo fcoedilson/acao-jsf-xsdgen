@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags">
+	
+	
+		<dd>
+			<h:outputLabel value="Nome do Arquivo" for="id" styleClass="labelNegrito"/>
+			<h:inputText id="nomexsd" value="#{xmlBean.nomeArquivo}" required="true"  size="60" maxlength="255" style="text-transform:none;">
+			</h:inputText>
+			<rich:message errorClass="error" for="nomexsd" styleClass="message"/>
+		</dd>
+
+		<dd>
+			<h:outputLabel value="Target Namespace" for="id" styleClass="labelNegrito"/>
+			<h:inputText id="tns" value="#{xmlBean.targetNamespace}" required="true"  size="60" maxlength="255" style="text-transform:none;">
+			</h:inputText>
+			<rich:message errorClass="error" for="tns" styleClass="message"/>
+		</dd>
+
+</ui:composition>

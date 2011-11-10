@@ -41,7 +41,8 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 	private boolean incluirGrupo = false;
 	private boolean autocomplete;
 	private boolean select;
-	private String itemCampo;
+	private String itemToInclude;
+	private String itemToRemove;
 	
 	private Map<String, List<Campo>> subNivelMap = new HashMap<String, List<Campo>>();
 	
@@ -117,22 +118,46 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 			} else {
 				subNivelMap.get(novoSubNivel).add(this.campo);
 			}
+			this.campos.add(this.campo);
 		} else {
 			
 			String baseSubNivel = "semsubnivel";
-			this.campo.setNomeSubnivel(baseSubNivel);
-			
-			if(!subNivelMap.containsKey(baseSubNivel)){
-				List<Campo> novaLista = new ArrayList<Campo>();
-				novaLista.add(this.campo);
-			} else {
-				subNivelMap.get(baseSubNivel).add(this.campo);
+			if(this.campo.getName() != null && this.campo.getTipo() != null){
+				this.campo.setNomeSubnivel(baseSubNivel);
+				
+				if(!subNivelMap.containsKey(baseSubNivel)){
+					List<Campo> novaLista = new ArrayList<Campo>();
+					novaLista.add(this.campo);
+				} else {
+					subNivelMap.get(baseSubNivel).add(this.campo);
+				}
+				this.campos.add(this.campo);
 			}
 		}
-		this.campos.add(this.campo);
+		
 		this.campo = new Campo();
 		return SUCCESS;
 	}
+	
+	public String adicionarItemCampo(){
+		if(this.campo.getItens() != null){
+			this.campo.getItens().add(this.itemToInclude);
+		} else {
+			this.campo.setItens(new ArrayList<String>());
+			this.campo.getItens().add(this.itemToInclude);
+		}
+		this.itemToInclude = null;
+		this.select = false;
+		return SUCCESS;
+	}
+	
+	public String removeItemCampo(){
+		if( this.campo.getItens() != null){
+			this.campo.getItens().remove(this.itemToRemove);
+		}
+		return SUCCESS;
+	}
+	
 
 	public String removeIndice(){
 		this.indices.remove(this.indice);
@@ -167,18 +192,6 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 		return SUCCESS;
 	}
 	
-	public String adicionarItemCampo(){
-		if(this.campo.getItens() != null){
-			this.campo.getItens().add(this.itemCampo);
-		} else {
-			this.campo.setItens(new ArrayList<String>());
-			this.campo.getItens().add(this.itemCampo);
-		}
-		this.itemCampo = null;
-		this.select = false;
-		return SUCCESS;
-	}
-
 	/*
 	 * usa o framework velocity para geração do arquivo XSD
 	 */
@@ -202,7 +215,7 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 			subniveis.add(novo);
 		}
 
-		for (int i = subniveis.size() - 1 ; i > 0; i--) {
+		for (int i = subniveis.size()-1 ; i > -1; i--) {
 			subniveis2.add(subniveis.get(i));
 		}
 		
@@ -327,12 +340,20 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 		this.select = select;
 	}
 	
-	public String getItemCampo() {
-		return itemCampo;
+	public String getItemToInclude() {
+		return itemToInclude;
 	}
 
-	public void setItemCampo(String itemCampo) {
-		this.itemCampo = itemCampo;
+	public void setItemToInclude(String itemToInclude) {
+		this.itemToInclude = itemToInclude;
+	}
+
+	public String getItemToRemove() {
+		return itemToRemove;
+	}
+
+	public void setItemToRemove(String itemToRemove) {
+		this.itemToRemove = itemToRemove;
 	}
 
 	@Override
