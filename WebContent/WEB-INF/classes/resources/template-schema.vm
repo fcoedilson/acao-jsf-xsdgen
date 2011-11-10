@@ -1,0 +1,132 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://schemas.fortaleza.ce.gov.br/acao/${documento.targetNamespace}.xsd"
+    xmlns:class="http://schemas.fortaleza.ce.gov.br/acao/classificacao.xsd"
+    xmlns:idx="http://schemas.fortaleza.ce.gov.br/acao/indexhint.xsd"
+    xmlns:xsdext="http://schemas.fortaleza.ce.gov.br/xsdform/extensions.xsd"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    targetNamespace="http://schemas.fortaleza.ce.gov.br/acao/${documento.targetNamespace}.xsd"
+    elementFormDefault="qualified">
+
+    <xs:element name="${documento.formName}" type="${documento.formName}">
+        <xs:annotation>
+            <xs:appinfo>
+                <xhtml:label>${documento.titulo}</xhtml:label>
+                <class:classificacoes>
+                    <class:classificacao>${documento.classificacao}</class:classificacao>
+                </class:classificacoes>
+                <idx:index>
+#foreach($index in $documento.indices)
+                    <idx:hint key="${index.key}" xpath="${index.path}"/>
+#end
+                </idx:index>
+            </xs:appinfo>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="${documento.formName}">
+        <xs:sequence>
+
+#foreach($subnivel in $subniveis)
+			<xs:element name="${subnivel.nome}">
+				<xs:annotation>
+					<xs:appinfo>
+						<xhtml:label>${subnivel.label}</xhtml:label>
+					</xs:appinfo>
+				</xs:annotation>
+				
+				<xs:complexType>
+					<xs:sequence>
+#foreach($campo in $subnivel.campos)
+#if($campo.tipo == 'textarea')
+						<xs:element name="${campo.name}"  minOccurs="${campo.obrigatorio}" type="xs:string">
+								<xs:annotation>
+									<xs:appinfo>
+										<xhtml:label>${campo.label}</xhtml:label>
+									</xs:appinfo>
+								</xs:annotation>
+						</xs:element>
+#end
+#if($campo.tipo == 'text')
+				        <xs:element name="${campo.name}" minOccurs="${campo.obrigatorio}">
+				            <xs:annotation>
+				                <xs:appinfo>
+				                    <xhtml:label>${campo.label}</xhtml:label>
+				                </xs:appinfo>
+				            </xs:annotation>
+				            <xs:simpleType>
+				                <xs:restriction base="xs:string">
+				                    <xs:maxLength value="255"/>
+				                </xs:restriction>
+				            </xs:simpleType>
+				        </xs:element>
+#end
+#if($campo.tipo == 'integer')
+				        <xs:element name="${campo.name}" type="xs:integer" minOccurs="${campo.obrigatorio}">
+				            <xs:annotation>
+				                <xs:appinfo>
+				                    <xhtml:label>${campo.label}</xhtml:label>
+				                </xs:appinfo>
+				            </xs:annotation>
+				        </xs:element>
+#end
+#if($campo.tipo == 'boolean')
+						<xs:element name="${campo.name}" type="xs:boolean">
+							<xs:annotation>
+								<xs:appinfo>
+									<xhtml:label>${campo.label}</xhtml:label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+#end
+#if($campo.tipo == 'date')
+						<xs:element name="${campo.name}" minOccurs="${campo.obrigatorio}" type="xs:date">
+							<xs:annotation>
+								<xs:appinfo>
+									<xhtml:label>${campo.label}</xhtml:label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+#end
+#if($campo.tipo == 'autocomplete')
+						<xs:element name="${campo.name}"  minOccurs="${campo.obrigatorio}" maxOccurs="10">
+							<xs:annotation>
+								<xs:appinfo>
+									<xhtml:label>${campo.label}</xhtml:label>
+								</xs:appinfo>
+					            <xsdext:extensions>
+						            <xsdext:engine>${campo.autocompleteEngine}</xsdext:engine>
+						            <xsdext:service>/${campo.autocompleteService}</xsdext:service>
+					            </xsdext:extensions>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="255" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+#end
+#if($campo.tipo == 'select')
+						<xs:element name="${campo.name}"  minOccurs="${campo.obrigatorio}">
+							<xs:annotation>
+								<xs:appinfo>
+									<xhtml:label>${campo.label}</xhtml:label>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:simpleType>
+							<xs:restriction base="xs:string">
+#foreach($item in $campo.itens)
+								<xs:enumeration value="${item}" />
+#end
+							</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+#end
+#end
+		            </xs:sequence>
+		        </xs:complexType>
+	        </xs:element>
+#end
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
