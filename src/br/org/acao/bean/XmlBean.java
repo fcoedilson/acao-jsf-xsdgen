@@ -20,7 +20,7 @@ import br.org.acao.util.VelocityUtil;
 
 @Scope("session")
 @Component("xmlBean")
-public class XmlBean extends EntityBean<Integer, Documento>  {
+public class XmlBean extends EntityBean<Integer, Campo>  {
 
 
 	private static final String XSD = "XSD";
@@ -30,12 +30,12 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 	private String classificacao;
 	private String targetNamespace = "";
 	private int obrigatorio;
-	
+
 	private Indice indice = new Indice();
 	private Campo campo = new Campo();
 	private String subNivel;
 	private String nomeArquivo;
-	
+
 	private List<Indice> indices = new ArrayList<Indice>();
 	private List<Campo> campos  = new ArrayList<Campo>();
 	private boolean incluirGrupo = false;
@@ -43,33 +43,37 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 	private boolean select;
 	private String itemToInclude;
 	private String itemToRemove;
-	
+	private Campo campoRemove = new Campo();
+	private Campo campoInclude = new Campo();
+	private Integer up;
+	private Integer down;
+
 	private Map<String, List<Campo>> subNivelMap = new HashMap<String, List<Campo>>();
-	
+
 
 	@Override
-	protected Documento createNewEntity() {
+	protected Campo createNewEntity() {
 		indices = new ArrayList<Indice>();
 		campos = new ArrayList<Campo>();
 		subNivelMap = new HashMap<String, List<Campo>>();
-		return new Documento();
+		return new Campo();
 	}
 
 	public boolean getCampoStatus(){
 		return campos.size() > 0;
 	}
-	
+
 	// reeturn true se contem algum elementos
 	public boolean getSubNiveisStatus(){
 		return subNivelMap.keySet().size() > 0;
 	}
-	
-	
+
+
 	// pega a lista de subniveis já incluidos
 	public List<String> getSubNivelList(){
 		return new ArrayList<String>(this.subNivelMap.keySet());
 	}
-	
+
 	public List<SelectItem> getCampoList(){
 		List<SelectItem> result = new ArrayList<SelectItem>();
 		for (Campo c : campos) {
@@ -79,7 +83,7 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 	}
 
 	@Override
-	protected Integer retrieveEntityId(Documento entity) {
+	protected Integer retrieveEntityId(Campo entity) {
 		return entity.getId();
 	}
 
@@ -104,43 +108,51 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 	}
 
 	public String adicionarCampo(){
-		
-		if(this.campo.getNomeSubnivel() != "" || this.campo.getNomeSubnivel() != null){
-			
-			String novoSubnivel = this.campo.getLabelSubnivel();
-			this.campo.setNomeSubnivel(novoSubnivel);
-			String novoSubNivel = this.campo.getNomeSubnivel().trim().toLowerCase().replace(" ", "");
-			
-			if(!subNivelMap.containsKey(novoSubNivel)){
+
+		String subNivel = "";
+
+		if(this.campo.getSubnivelLabel() != "" || this.campo.getSubnivelLabel() != null){
+
+			subNivel = this.campo.getSubnivelLabel();
+			this.campo.setSubnivelName(this.campo.getSubnivelName().trim().replace(" ", ""));
+
+			if(!subNivelMap.containsKey(subNivel)){
 				List<Campo> novaLista = new ArrayList<Campo>();
 				novaLista.add(this.campo);
-				subNivelMap.put(novoSubNivel, novaLista);
+				subNivelMap.put(subNivel, novaLista);
 			} else {
-				subNivelMap.get(novoSubNivel).add(this.campo);
+				subNivelMap.get(subNivel).add(this.campo);
 			}
 			this.autocomplete = false;
-			this.campos.add(this.campo);
+
 		} else {
-			
-			String baseSubNivel = "semsubnivel";
+
+			subNivel = "semSubnivel";
 			if(this.campo.getName() != null && this.campo.getTipo() != null){
-				this.campo.setNomeSubnivel(baseSubNivel);
-				
-				if(!subNivelMap.containsKey(baseSubNivel)){
+
+				this.campo.setSubnivelName(subNivel);
+				if(!subNivelMap.containsKey(subNivel)){
 					List<Campo> novaLista = new ArrayList<Campo>();
 					novaLista.add(this.campo);
 				} else {
-					subNivelMap.get(baseSubNivel).add(this.campo);
+					subNivelMap.get(subNivel).add(this.campo);
 				}
 				this.autocomplete = false;
-				this.campos.add(this.campo);
 			}
 		}
+
+		this.campos = new ArrayList<Campo>();
+
+		for (String s : subNivelMap.keySet()) {
+			this.campos.addAll(subNivelMap.get(s));
+		}
 		
+		this.select = false;
+
 		this.campo = new Campo();
 		return SUCCESS;
 	}
-	
+
 	public String adicionarItemCampo(){
 		if(this.campo.getItens() != null){
 			this.campo.getItens().add(this.itemToInclude);
@@ -149,17 +161,17 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 			this.campo.getItens().add(this.itemToInclude);
 		}
 		this.itemToInclude = null;
-		this.select = false;
+		//this.select = false;
 		return SUCCESS;
 	}
-	
+
 	public String removeItemCampo(){
 		if( this.campo.getItens() != null){
 			this.campo.getItens().remove(this.itemToRemove);
 		}
 		return SUCCESS;
 	}
-	
+
 
 	public String removeIndice(){
 		this.indices.remove(this.indice);
@@ -168,18 +180,69 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 	}
 
 	public String removeCampo(){
-		this.campos.remove(this.campo);
-		String novoSubNivel = this.campo.getNomeSubnivel().trim().toLowerCase().replace(" ", "");
-		subNivelMap.get(novoSubNivel).remove(this.campo);
-		this.campo = new Campo();
+		String subNivel = this.campoRemove.getSubnivelLabel().trim().toLowerCase().replace(" ", "");
+		subNivelMap.get(subNivel).remove(this.campoRemove);
+		//this.campos.remove(this.campoRemove);
+		this.campos = subNivelMap.get(subNivel);
+		//this.campos = subNivelMap.get(novoSubNivel);
+		this.campoRemove = new Campo();
 		return SUCCESS;
 	}
+
+	public String upField(){
+		Campo toup = this.campos.get(this.up);
+		if(toup != null && this.up > 0){
+			Campo todown = this.campos.get(this.up-1);
+			if(todown != null){
+				this.campos.set(this.up-1, toup);
+				this.campos.set(this.up, todown);
+			}
+		}
+		return SUCCESS;
+	}
+
+	public String downField(){
+		Campo todown = this.campos.get(this.down);
+		if(todown != null && this.down < this.campos.size() ){
+			Campo toup = this.campos.get(this.down+1);
+			if(toup != null){
+				this.campos.set(this.down, toup);
+				this.campos.set(this.down+1, todown);
+			}
+		}
+
+		return SUCCESS;
+	}
+
+	public String upItem(){
+		String toup = this.campo.getItens().get(this.up); 
+		if(toup != null && this.up > 0){
+			String todown = this.campo.getItens().get(this.up-1);
+			if(todown != null){
+				this.campo.getItens().set(this.up-1, toup);
+				this.campo.getItens().set(this.up, todown);
+			}
+		}
+		return SUCCESS;
+	}
+
+	public String downItem(){
+		String todown = this.campo.getItens().get(this.down); 
+		if(this.down != null && this.down < this.campo.getItens().size()-1){
+			String toup = this.campo.getItens().get(this.down+1);
+			this.campo.getItens().set(this.down, toup);
+			this.campo.getItens().set(this.down+1, todown);
+		}
+
+		return SUCCESS;
+	}
+
 	/**
 	 * Verifica o tipo do campo, caso seja autocomplete ou select, redenderiza itens adicionais na tela
 	 * @return
 	 */
 	public String verificarTipoCampo(){
-		
+
 		if(this.campo.getTipo() != null){
 			if(this.campo.getTipo().equals("select")){
 				this.select = true;
@@ -193,7 +256,7 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 		this.select = false;
 		return SUCCESS;
 	}
-	
+
 	/*
 	 * usa o framework velocity para geração do arquivo XSD
 	 */
@@ -206,25 +269,21 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 		documento.setClassificacao(this.classificacao);
 		documento.setIndices(this.indices);		
 		List<SubNivel> subniveis = new ArrayList<SubNivel>();
-		List<SubNivel> subniveis2 = new ArrayList<SubNivel>();
-		
+
 		for (String sub : subNivelMap.keySet()) {
 			SubNivel novo = new SubNivel();
 			List<Campo> campos = subNivelMap.get(sub);
-			novo.setNome(campos.get(0).getNomeSubnivel().replace(" ", "").toLowerCase());
-			novo.setLabel(campos.get(0).getLabelSubnivel());
+			novo.setNome(campos.get(0).getSubnivelName().replace(" ", "").toLowerCase());
+			novo.setLabel(campos.get(0).getSubnivelLabel());
 			novo.setCampos(campos);
 			subniveis.add(novo);
 		}
 
-		for (int i = subniveis.size()-1 ; i > -1; i--) {
-			subniveis2.add(subniveis.get(i));
-		}
-		
-		byte[] bytes = VelocityUtil.merge("template-schema.vm", new String[]{"documento", "subniveis"}, new Object[]{documento, subniveis2});
+
+		byte[] bytes = VelocityUtil.merge("template-schema.vm", new String[]{"documento", "subniveis"}, new Object[]{documento, subniveis});
 		return DownloadFileUtil.downloadFile(bytes, this.nomeArquivo + ".xsd", "application/text");
 	}
-	
+
 	public String getSubNivel() {
 		return subNivel;
 	}
@@ -242,7 +301,7 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 	}
 
 	public String populate(){
-				return SUCCESS;
+		return SUCCESS;
 	}
 
 	public int getObrigatorio() {
@@ -317,7 +376,7 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 	public void setTargetNamespace(String targetNamespace) {
 		this.targetNamespace = targetNamespace;
 	}
-	
+
 	public boolean isIncluirGrupo() {
 		return incluirGrupo;
 	}
@@ -341,7 +400,7 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 	public void setSelect(boolean select) {
 		this.select = select;
 	}
-	
+
 	public String getItemToInclude() {
 		return itemToInclude;
 	}
@@ -358,8 +417,40 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 		this.itemToRemove = itemToRemove;
 	}
 
+	public Campo getCampoRemove() {
+		return campoRemove;
+	}
+
+	public void setCampoRemove(Campo campoRemove) {
+		this.campoRemove = campoRemove;
+	}
+
+	public Campo getCampoInclude() {
+		return campoInclude;
+	}
+
+	public void setCampoInclude(Campo campoInclude) {
+		this.campoInclude = campoInclude;
+	}
+
+	public Integer getUp() {
+		return up;
+	}
+
+	public void setUp(Integer up) {
+		this.up = up;
+	}
+
+	public Integer getDown() {
+		return down;
+	}
+
+	public void setDown(Integer down) {
+		this.down = down;
+	}
+
 	@Override
-	protected BaseService<Integer, Documento> retrieveEntityService() {
+	protected BaseService<Integer, Campo> retrieveEntityService() {
 		// TODO Auto-generated method stub
 		return null;
 	}

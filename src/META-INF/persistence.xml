@@ -2,13 +2,13 @@
 <persistence version="1.0"
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
-	<persistence-unit name="xsd" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="acao-jsf-xsdgen" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		
 		<class>br.org.acao.entity.Documento</class>
 
 		<properties>
-			<property name="hibernate.connection.datasource" value="java:/comp/env/jdbc/xsd" />
+			<property name="hibernate.connection.datasource" value="java:/comp/env/jdbc/acao-jsf-xsdgen" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"></property>
 			<property name="hibernate.cache.use_second_level_cache" value="true" />

@@ -56,9 +56,28 @@
 				            <xs:simpleType>
 				                <xs:restriction base="xs:string">
 				                    <xs:maxLength value="255"/>
+#if($campo.regex)
+				                    <xs:pattern value="${campo.regex}"/>
+#end
 				                </xs:restriction>
 				            </xs:simpleType>
 				        </xs:element>
+#end
+#if($campo.tipo == 'decimal')
+						<xs:element name="${campo.name}" minOccurs="${campo.obrigatorio}">
+		                    <xs:annotation>
+			                    <xs:appinfo>
+				                    <xhtml:label>${campo.label}</xhtml:label>
+			                    </xs:appinfo>
+		                    </xs:annotation>
+			                <xs:simpleType>
+                                <xs:restriction base="xs:decimal">
+                                    <xs:fractionDigits value='2'/>
+                                    <xs:maxExclusive value="1000000"/>
+                                    <xs:minInclusive value="-1000000"/>
+                                </xs:restriction>
+			                </xs:simpleType>
+	                    </xs:element>
 #end
 #if($campo.tipo == 'integer')
 				        <xs:element name="${campo.name}" type="xs:integer" minOccurs="${campo.obrigatorio}">
@@ -94,7 +113,7 @@
 									<xhtml:label>${campo.label}</xhtml:label>
 								</xs:appinfo>
 					            <xsdext:extensions>
-						            <xsdext:engine>${campo.autocompleteEngine}</xsdext:engine>
+						            <xsdext:engine>autoComplete</xsdext:engine>
 						            <xsdext:service>/${campo.autocompleteService}</xsdext:service>
 					            </xsdext:extensions>
 							</xs:annotation>
@@ -120,6 +139,27 @@
 							</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
+#end
+#if($campo.tipo == 'checkboxlist')
+						<xs:element name="alimentacao" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo>
+									<xhtml:label>Alimentação</xhtml:label>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+#foreach($item in $campo.cxitens)
+									<xs:element name="${item.name}" type="xs:boolean">
+										<xs:annotation>
+											<xs:appinfo>
+												<xhtml:label>${item.label}</xhtml:label>
+											</xs:appinfo>
+										</xs:annotation>
+									</xs:element>
+#end
+				            </xs:sequence>
+				        </xs:complexType>
 #end
 #end
 		            </xs:sequence>

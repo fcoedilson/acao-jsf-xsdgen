@@ -11,13 +11,14 @@ public class Campo implements Serializable{
 	private String name;
 	private String label;
 	private String tipo;
-	private String maskara;
+	private String regex;
 	private int obrigatorio;
-	private String nomeSubnivel;
-	private String labelSubnivel;
+	private String subnivelName;
+	private String subnivelLabel;
 	private String autocompleteEngine;
 	private String autocompleteService;
 	private List<String> itens;
+	private List<Itemcbox> cboxItens;
 	
 	private List<Campo> campos;
 	
@@ -61,14 +62,14 @@ public class Campo implements Serializable{
 		this.obrigatorio = obrigatorio;
 	}
 
-	public String getMaskara() {
-		return maskara;
+	public String getRegex() {
+		return regex;
 	}
 
-	public void setMaskara(String maskara) {
-		this.maskara = maskara;
+	public void setRegex(String regex) {
+		this.regex = regex;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -77,22 +78,22 @@ public class Campo implements Serializable{
 		this.id = id;
 	}
 
-	public String getNomeSubnivel() {
-		return nomeSubnivel;
+	public String getSubnivelName() {
+		return subnivelName;
 	}
 
-	public void setNomeSubnivel(String nomeSubnivel) {
-		this.nomeSubnivel = nomeSubnivel;
+	public void setSubnivelName(String subnivelName) {
+		this.subnivelName = subnivelName;
 	}
 
-	public String getLabelSubnivel() {
-		return labelSubnivel;
+	public String getSubnivelLabel() {
+		return subnivelLabel;
 	}
 
-	public void setLabelSubnivel(String labelSubnivel) {
-		this.labelSubnivel = labelSubnivel;
+	public void setSubnivelLabel(String subnivelLabel) {
+		this.subnivelLabel = subnivelLabel;
 	}
-	
+
 	public String getAutocompleteEngine() {
 		return autocompleteEngine;
 	}
@@ -117,9 +118,19 @@ public class Campo implements Serializable{
 		this.itens = itens;
 	}
 
+	public List<Itemcbox> getCboxItens() {
+		return cboxItens;
+	}
+
+	public void setCboxItens(List<Itemcbox> cboxItens) {
+		this.cboxItens = cboxItens;
+	}
+
 	public int hashCode() {
 		int result = 1;
 		result = 31 * result + ((id == null) ? 0 : id.hashCode());
+		result = 31 * result + ((name == null) ? 0 : name.hashCode());
+		result = 31 * result + ((label == null) ? 0 : label.hashCode());
 		return result;
 	}
 
@@ -131,6 +142,8 @@ public class Campo implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Campo other = (Campo) obj;
-		return ((id == null && other.id == null) || (id != null && id.equals(other.id)));
+		return ((id == null && other.id == null) || (id != null && id.equals(other.id))) &&
+			   ((name == null && other.name == null) || (name != null && name.equals(other.name))) &&
+			   ((label == null && other.label == null) || (label != null && label.equals(other.label)));
 	}
 }
