@@ -7,6 +7,6 @@
 		username="sigafrota"
 		password="@2011"
 		driverClassName="org.postgresql.Driver"
-		url="jdbc:postgresql://172.30.116.126:5432/acao-xsd"/>
+		url="jdbc:postgresql://localhost:5432/acao-docsxsd"/>
 
 </Context>

@@ -84,13 +84,18 @@
 
 
 			<a4j:outputPanel id="gridAutocompleteCampo" rendered="#{xmlBean.autocomplete}" >
-			    <h:outputLabel value="Engine" for="autocompleteEngine" styleClass="labelNegrito"/>
-	       		<h:inputText id="autocompleteEngine" value="#{xmlBean.campo.autocompleteEngine}"  size="40" maxlength="255" style="text-transform:none;"/>
-	       		<rich:message errorClass="error" for="autocompleteEngine" styleClass="message"/>
-	       		
-			    <h:outputLabel value="Servico" for="autocompleteService" styleClass="labelNegrito"/>
-	       		<h:inputText id="autocompleteService" value="#{xmlBean.campo.autocompleteService}"  size="40" maxlength="255" style="text-transform:none;"/>
-	       		<rich:message errorClass="error" for="autocompleteService" styleClass="message"/>
+				<dt><h:outputLabel value="Engine" for="autocompleteEngine" styleClass="labelNegrito"/></dt>
+			    <dd>
+	       			<h:inputText id="autocompleteEngine" value="#{xmlBean.campo.autocompleteEngine}"  size="40" maxlength="255" style="text-transform:none;"/>
+	       			<rich:message errorClass="error" for="autocompleteEngine" styleClass="message"/>
+	       		</dd>
+	       		<dt>
+			    	<h:outputLabel value="Servico" for="autocompleteService" styleClass="labelNegrito"/>
+			    </dt>
+			    <dd>
+	       			<h:inputText id="autocompleteService" value="#{xmlBean.campo.autocompleteService}"  size="40" maxlength="255" style="text-transform:none;"/>
+	       			<rich:message errorClass="error" for="autocompleteService" styleClass="message"/>
+	       		</dd>
 	       	</a4j:outputPanel>
 
 			<dt><h:outputLabel value="Itens incluídos" for="dataTableItensCampo" rendered="#{not empty xmlBean.campo.itens}" styleClass="labelNegrito"/></dt>

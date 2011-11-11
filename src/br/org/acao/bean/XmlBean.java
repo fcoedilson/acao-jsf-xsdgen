@@ -118,6 +118,7 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 			} else {
 				subNivelMap.get(novoSubNivel).add(this.campo);
 			}
+			this.autocomplete = false;
 			this.campos.add(this.campo);
 		} else {
 			
@@ -131,6 +132,7 @@ public class XmlBean extends EntityBean<Integer, Documento>  {
 				} else {
 					subNivelMap.get(baseSubNivel).add(this.campo);
 				}
+				this.autocomplete = false;
 				this.campos.add(this.campo);
 			}
 		}
