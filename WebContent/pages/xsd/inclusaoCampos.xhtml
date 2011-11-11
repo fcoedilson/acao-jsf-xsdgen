@@ -19,14 +19,14 @@
 
 			<dt><h:outputLabel value="Name" for="idcampo" styleClass="labelNegrito"/></dt>
 			<dd>
-				<h:inputText id="idcampo" value="#{xmlBean.campo.name}"  size="30" maxlength="255" style="text-transform:none;">
+				<h:inputText id="idcampo" value="#{xmlBean.campo.name}"  size="30" maxlength="30" style="text-transform:none;">
 				</h:inputText>
 				<rich:message errorClass="error" for="idcampo" styleClass="message"/>
 			</dd>
 			
 			<dt><h:outputLabel value="Label" for="nomeCampo" styleClass="labelNegrito"/></dt>
 			<dd>
-				<h:inputText id="nomeCampo" value="#{xmlBean.campo.label}"  size="40" maxlength="255" style="text-transform:none;">
+				<h:inputText id="nomeCampo" value="#{xmlBean.campo.label}"  size="40" maxlength="40" style="text-transform:none;">
 				</h:inputText>
 				<rich:message errorClass="error" for="nomeCampo" styleClass="message"/>
 			</dd>
@@ -74,7 +74,7 @@
 			    	<h:outputLabel id="itemCampoLabel" value="Item do campo" for="itemCampo" styleClass="labelNegrito"/>
 			    </dt>
 			    <dd>
-		       		<h:inputText id="itemCampo" value="#{xmlBean.itemToInclude}"  size="28" maxlength="255" style="text-transform:none;"/>
+		       		<h:inputText id="itemCampo" value="#{xmlBean.itemToInclude}"  size="30" maxlength="30" style="text-transform:none;"/>
 		       		<h:commandLink action="#{xmlBean.adicionarItemCampo}" value="Salvar Item" styleClass="novo">
 			      		<a4j:support event="onclick" reRender="dataTableItensCampo, gridItemCampo"/>
 			      	</h:commandLink>
@@ -86,14 +86,14 @@
 			<a4j:outputPanel id="gridAutocompleteCampo" rendered="#{xmlBean.autocomplete}" >
 				<dt><h:outputLabel value="Engine" for="autocompleteEngine" styleClass="labelNegrito"/></dt>
 			    <dd>
-	       			<h:inputText id="autocompleteEngine" value="#{xmlBean.campo.autocompleteEngine}"  size="40" maxlength="255" style="text-transform:none;"/>
+	       			<h:inputText id="autocompleteEngine" value="#{xmlBean.campo.autocompleteEngine}"  size="40" maxlength="40" style="text-transform:none;"/>
 	       			<rich:message errorClass="error" for="autocompleteEngine" styleClass="message"/>
 	       		</dd>
 	       		<dt>
 			    	<h:outputLabel value="Servico" for="autocompleteService" styleClass="labelNegrito"/>
 			    </dt>
 			    <dd>
-	       			<h:inputText id="autocompleteService" value="#{xmlBean.campo.autocompleteService}"  size="40" maxlength="255" style="text-transform:none;"/>
+	       			<h:inputText id="autocompleteService" value="#{xmlBean.campo.autocompleteService}"  size="40" maxlength="40" style="text-transform:none;"/>
 	       			<rich:message errorClass="error" for="autocompleteService" styleClass="message"/>
 	       		</dd>
 	       	</a4j:outputPanel>
