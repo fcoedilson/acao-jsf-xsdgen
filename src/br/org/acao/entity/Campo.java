@@ -18,7 +18,8 @@ public class Campo implements Serializable{
 	private String autocompleteEngine;
 	private String autocompleteService;
 	private List<String> itens;
-	private List<Itemcbox> cboxItens;
+	private List<Itemcbox> checkboxItens;
+	private List<Campo> subcampos;
 	
 	private List<Campo> campos;
 	
@@ -118,12 +119,20 @@ public class Campo implements Serializable{
 		this.itens = itens;
 	}
 
-	public List<Itemcbox> getCboxItens() {
-		return cboxItens;
+	public List<Itemcbox> getCheckboxItens() {
+		return checkboxItens;
 	}
 
-	public void setCboxItens(List<Itemcbox> cboxItens) {
-		this.cboxItens = cboxItens;
+	public void setCheckboxItens(List<Itemcbox> checkboxItens) {
+		this.checkboxItens = checkboxItens;
+	}
+
+	public List<Campo> getSubcampos() {
+		return subcampos;
+	}
+
+	public void setSubcampos(List<Campo> subcampos) {
+		this.subcampos = subcampos;
 	}
 
 	public int hashCode() {

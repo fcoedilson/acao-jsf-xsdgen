@@ -97,6 +97,147 @@
 							</xs:annotation>
 						</xs:element>
 #end
+
+#if($campo.tipo == 'multiploscampos')
+#foreach($subcampo in $campo.subcampos)
+			<xs:element name="${subcampo.subcampoName}">
+				<xs:annotation>
+					<xs:appinfo>
+						<xhtml:label>${subcampo.subcampoLabel}</xhtml:label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+
+#if($subcampo.tipo == 'textarea')
+						<xs:element name="${subcampo.name}"  minOccurs="${subcampo.obrigatorio}" type="xs:string">
+								<xs:annotation>
+									<xs:appinfo>
+										<xhtml:label>${subcampo.label}</xhtml:label>
+									</xs:appinfo>
+								</xs:annotation>
+						</xs:element>
+#end
+#if($subcampo.tipo == 'text')
+				        <xs:element name="${subcampo.name}" minOccurs="${subcampo.obrigatorio}">
+				            <xs:annotation>
+				                <xs:appinfo>
+				                    <xhtml:label>${subcampo.label}</xhtml:label>
+				                </xs:appinfo>
+				            </xs:annotation>
+				            <xs:simpleType>
+				                <xs:restriction base="xs:string">
+				                    <xs:maxLength value="255"/>
+#if($subcampo.regex)
+            						<xs:pattern value="${subcampo.regex}"/>
+#end
+				                </xs:restriction>
+				            </xs:simpleType>
+				        </xs:element>
+#end
+#if($subcampo.tipo == 'decimal')
+						<xs:element name="${subcampo.name}" minOccurs="${subcampo.obrigatorio}">
+		                    <xs:annotation>
+			                    <xs:appinfo>
+				                    <xhtml:label>${subcampo.label}</xhtml:label>
+			                    </xs:appinfo>
+		                    </xs:annotation>
+			                <xs:simpleType>
+                                <xs:restriction base="xs:decimal">
+                                    <xs:fractionDigits value='2'/>
+                                    <xs:maxExclusive value="1000000"/>
+                                    <xs:minInclusive value="-1000000"/>
+                                </xs:restriction>
+			                </xs:simpleType>
+	                    </xs:element>
+#end
+#if($subcampo.tipo == 'integer')
+				        <xs:element name="${subcampo.name}" type="xs:integer" minOccurs="${subcampo.obrigatorio}">
+				            <xs:annotation>
+				                <xs:appinfo>
+				                    <xhtml:label>${subcampo.label}</xhtml:label>
+				                </xs:appinfo>
+				            </xs:annotation>
+				        </xs:element>
+#end
+#if($subcampo.tipo == 'boolean')
+						<xs:element name="${subcampo.name}" type="xs:boolean">
+							<xs:annotation>
+								<xs:appinfo>
+									<xhtml:label>${subcampo.label}</xhtml:label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+#end
+#if($subcampo.tipo == 'date')
+						<xs:element name="${subcampo.name}" minOccurs="${subcampo.obrigatorio}" type="xs:date">
+							<xs:annotation>
+								<xs:appinfo>
+									<xhtml:label>${subcampo.label}</xhtml:label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+#end
+#if($subcampo.tipo == 'autocomplete')
+						<xs:element name="${subcampo.name}"  minOccurs="${subcampo.obrigatorio}" maxOccurs="10">
+							<xs:annotation>
+								<xs:appinfo>
+									<xhtml:label>${subcampo.label}</xhtml:label>
+								</xs:appinfo>
+					            <xsdext:extensions>
+						            <xsdext:engine>autoComplete</xsdext:engine>
+						            <xsdext:service>/${subcampo.autocompleteService}</xsdext:service>
+					            </xsdext:extensions>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="255" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+#end
+#if($subcampo.tipo == 'select')
+						<xs:element name="${subcampo.name}"  minOccurs="${subcampo.obrigatorio}">
+							<xs:annotation>
+								<xs:appinfo>
+									<xhtml:label>${subcampo.label}</xhtml:label>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:simpleType>
+							<xs:restriction base="xs:string">
+#foreach($item in $subcampo.itens)
+								<xs:enumeration value="${item}" />
+#end
+							</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+#end
+#if($subcampo.tipo == 'checkboxlist')
+						<xs:element name="${subcampo.name}" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo>
+									<xhtml:label>${subcampo.label}</xhtml:label>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+#foreach($item in $subcampo.checkboxitens)
+									<xs:element name="${item.name}" type="xs:boolean">
+										<xs:annotation>
+											<xs:appinfo>
+												<xhtml:label>${item.label}</xhtml:label>
+											</xs:appinfo>
+										</xs:annotation>
+									</xs:element>
+#end
+				            </xs:sequence>
+				        </xs:complexType>
+#end
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+#end
+#end
 #if($campo.tipo == 'date')
 						<xs:element name="${campo.name}" minOccurs="${campo.obrigatorio}" type="xs:date">
 							<xs:annotation>
@@ -141,10 +282,10 @@
 						</xs:element>
 #end
 #if($campo.tipo == 'checkboxlist')
-						<xs:element name="alimentacao" minOccurs="0">
+						<xs:element name="${campo.name}" minOccurs="0">
 							<xs:annotation>
 								<xs:appinfo>
-									<xhtml:label>Alimentação</xhtml:label>
+									<xhtml:label>${campo.label}</xhtml:label>
 								</xs:appinfo>
 							</xs:annotation>
 							<xs:complexType>
