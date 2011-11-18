@@ -10,15 +10,15 @@
      xmlns:t="http://myfaces.apache.org/tomahawk">
 
 	<div id="cadastro">
-			
+
 			<h2>Plataforma Ação - Gerador de XSD</h2>
-			
+
 
 			<fieldset style="margin-bottom:20px">
 			    <legend>Dados do Arquivo</legend>
 				<ui:include src="dadosArquivo.xhtml" />
 			</fieldset>
-	    	
+
 	    	<fieldset style="margin-bottom:20px">
 			    <legend>Dados do Documento</legend>	
 	    		<ui:include src="dadosDocumento.xhtml" />
@@ -38,8 +38,12 @@
 		<h:commandButton value="Gravar XSD" action="#{xmlBean.downloadXsdFile}" styleClass="button">
 			<a4j:support event="oncomplete"  reRender="paginaPrincipal"/>
 		</h:commandButton>
-	
+
+		<h:commandButton value="Limpar" action="#{xmlBean.reset}" styleClass="button" imediate="true">
+			<a4j:support event="onclick"  reRender="paginaPrincipal"/>
+		</h:commandButton>
+
 
 	</div>
-	
+
 </ui:composition>

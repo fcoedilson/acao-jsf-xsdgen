@@ -16,20 +16,22 @@
 		<fieldset style="margin-bottom:20px">
 		
 			 <legend>Sub Nível</legend>
-			<dt><h:outputLabel value="Subnível Name" for="subnivel" styleClass="labelNegrito"/></dt>
-			<dd>
-				<h:inputText id="subnivelName" value="#{xmlBean.campo.subnivelName}"  size="40" maxlength="255" style="text-transform:none;"/>
-				<rich:message errorClass="error" for="subnivelName" styleClass="message" rendered="false"/>
-			</dd>
-			
-			<dt><h:outputLabel value="Subnível Label" for="subnivel" styleClass="labelNegrito"/></dt>
-			<dd>
-				<h:inputText id="subnivelLabel" value="#{xmlBean.campo.subnivelLabel}"  size="40" maxlength="255" imediate="true" style="text-transform:none;"/>
-				<rich:message errorClass="error" for="subnivelLabel" styleClass="message" rendered="false"/>
-				<h:commandLink action="#{xmlBean.limparSubnivel}" value="Limpar" styleClass="novo" style="padding-left:20px">
-			      	<a4j:support event="onclick"  reRender="subnivelName,subnivelLabel"/>
-			    </h:commandLink>
-			</dd>
+			 <a4j:outputPanel id="panelSubnive">
+				<dt><h:outputLabel value="Subnível Name" for="subnivel" styleClass="labelNegrito"/></dt>
+				<dd>
+					<h:inputText id="subnivelName" value="#{xmlBean.campo.subnivelName}"  size="40" maxlength="255" style="text-transform:none;"/>
+					<rich:message errorClass="error" for="subnivelName" styleClass="message" rendered="false"/>
+				</dd>
+				
+				<dt><h:outputLabel value="Subnível Label" for="subnivel" styleClass="labelNegrito"/></dt>
+				<dd>
+					<h:inputText id="subnivelLabel" value="#{xmlBean.campo.subnivelLabel}"  size="40" maxlength="255" imediate="true" style="text-transform:none;"/>
+					<rich:message errorClass="error" for="subnivelLabel" styleClass="message" rendered="false"/>
+					<h:commandLink action="#{xmlBean.limparSubnivel}" value="Limpar" styleClass="novo" style="padding-left:20px">
+				      	<a4j:support event="onclick"  reRender="panelSubnive"/>
+				    </h:commandLink>
+				</dd>
+			</a4j:outputPanel>
 			 
 		 </fieldset>
 	
@@ -47,31 +49,9 @@
 			
 			<dt><h:outputLabel value="Label" for="nomeCampo" styleClass="labelNegrito"/></dt>
 			<dd>
-				<h:inputText id="nomeCampo" value="#{xmlBean.campo.label}"  size="40" maxlength="30" style="text-transform:none;">
+				<h:inputText id="nomeCampo" value="#{xmlBean.campo.label}"  size="40" maxlength="120" style="text-transform:none;">
 				</h:inputText>
 				<rich:message errorClass="error" for="nomeCampo" styleClass="message"/>
-			</dd>
-			
-			<dt><h:outputLabel value="Mascara" for="maskara" styleClass="labelNegrito"/></dt>
-			<dd>
-				<h:selectOneMenu id="maskara" value="#{xmlBean.campo.regex}" style="width:100px">
-					<f:selectItem itemLabel="Selecione ..." itemValue=""/>
-					<f:selectItem itemLabel="Data" itemValue="\d{2}/\d{2}/\d{4}"/>
-					<f:selectItem itemLabel="RG" itemValue="[0-9]+[0-9]+"/>
-					<f:selectItem itemLabel="CPF" itemValue="[0-9]{3}\."/>
-					<f:selectItem itemLabel="Númerico" itemValue="[0-9]+"/>
-					<f:selectItem itemLabel="Telefone" itemValue="(\(\d{2}\)-)?\d{4}-d{4}"/>
-	    		</h:selectOneMenu>
-	    		<rich:message errorClass="error" for="tipoCampo" styleClass="message"/>
-			</dd>
-			
-			<dt><h:outputLabel value="Obrigatório" for="obrigatorio" styleClass="labelNegrito"/></dt>
-			<dd>
-				<h:selectOneMenu id="obrigatorio" value="#{xmlBean.campo.obrigatorio}" style="width:60px">
-					<f:selectItem itemLabel="Sim" itemValue="1"/>
-					<f:selectItem itemLabel="Não" itemValue="0"/>
-		    		</h:selectOneMenu>
-	    		<rich:message errorClass="error" for="obrigatorio" styleClass="message"/>
 			</dd>
 			
 			<dt><h:outputLabel value="Tipo" for="tipoCampo" styleClass="labelNegrito"/></dt>
@@ -94,29 +74,115 @@
 	    		<h:commandLink action="#{xmlBean.verificarTipoCampo}" value="NovoItem" styleClass="novo" style="padding-left:20px">
 		      		<a4j:support event="onclick" action="#{xmlBean.verificarTipoCampo}" reRender="gridItemCampo"/>
 		      	</h:commandLink>
-		      	
+
 	    		<h:commandLink action="#{xmlBean.verificarTipoCampo}" value="Autocomplete" styleClass="novo" style="padding-left:20px">
 		      		<a4j:support event="onclick" action="#{xmlBean.verificarTipoCampo}" reRender="gridAutocompleteCampo"/>
 		      	</h:commandLink>
-		      	
+
 	    		<h:commandLink action="#{xmlBean.verificarTipoCampo}" value="Multi Campos" styleClass="novo" style="padding-left:20px">
 		      		<a4j:support event="onclick" action="#{xmlBean.verificarTipoCampo}" reRender="gridMultCampos"/>
 		      	</h:commandLink>
 
 			</dd>
 			
-			<a4j:outputPanel id="gridMultCampos" rendered="#{xmlBean.multiCampos}">
+			<dt><h:outputLabel value="Obrigatório" for="obrigatorio" styleClass="labelNegrito"/></dt>
+			<dd>
+				<h:selectOneMenu id="obrigatorio" value="#{xmlBean.campo.obrigatorio}" style="width:60px">
+					<f:selectItem itemLabel="Sim" itemValue="1"/>
+					<f:selectItem itemLabel="Não" itemValue="0"/>
+		    		</h:selectOneMenu>
+	    		<rich:message errorClass="error" for="obrigatorio" styleClass="message"/>
+			</dd>
+			
+			
+			<dt><h:outputLabel value="Mascara" for="maskara" styleClass="labelNegrito"/></dt>
+			<dd>
+				<h:selectOneMenu id="maskara" value="#{xmlBean.campo.regex}" style="width:100px">
+					<f:selectItem itemLabel="Selecione ..." itemValue=""/>
+					<f:selectItem itemLabel="Data" itemValue="\d{2}/\d{2}/\d{4}"/>
+					<f:selectItem itemLabel="RG" itemValue="[0-9]+[0-9]+"/>
+					<f:selectItem itemLabel="CPF" itemValue="[0-9]{3}\."/>
+					<f:selectItem itemLabel="Númerico" itemValue="[0-9]+"/>
+					<f:selectItem itemLabel="Telefone" itemValue="(\(\d{2}\)-)?\d{4}-d{4}"/>
+	    		</h:selectOneMenu>
+	    		<rich:message errorClass="error" for="tipoCampo" styleClass="message"/>
+			</dd>
+
+			<a4j:outputPanel id="gridMultCampos" rendered="#{xmlBean.multicampos}">
 
 				<fieldset style="margin-bottom:20px">
-				
-					 <legend>Novo subcampo</legend>
+
+					 <legend>Subcampo</legend>
+
+					<dt><h:outputLabel value="Name" for="idsubcampo" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:inputText id="idSubcampo" value="#{xmlBean.subcampo.name}"  size="30" maxlength="30" style="text-transform:none;">
+						</h:inputText>
+						<rich:message errorClass="error" for="idsubcampo" styleClass="message"/>
+					</dd>
+					
+					<dt><h:outputLabel value="Label" for="nomeSubcampo" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:inputText id="nomeSubcampo" value="#{xmlBean.subcampo.label}"  size="40" maxlength="120" style="text-transform:none;">
+						</h:inputText>
+						<rich:message errorClass="error" for="nomeSubcampo" styleClass="message"/>
+					</dd>
+					
+					<dt><h:outputLabel value="Tipo" for="tipoSubcampo" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:selectOneMenu id="tipoSubcampo" value="#{xmlBean.subcampo.tipo}" style="width:100px">
+							<f:selectItem itemLabel="Selecione ..." itemValue=""/>
+							<f:selectItem itemLabel="String" itemValue="text"/>
+							<f:selectItem itemLabel="Inteiro" itemValue="integer"/>
+							<f:selectItem itemLabel="Data" itemValue="date"/>
+							<f:selectItem itemLabel="Decimal" itemValue="float"/>
+							<f:selectItem itemLabel="Select" itemValue="select"/>
+							<f:selectItem itemLabel="Checkbox" itemValue="checkbox"/>
+							<f:selectItem itemLabel="Checkbox List" itemValue="checkboxlist"/>
+							<f:selectItem itemLabel="Textarea" itemValue="textarea"/>
+							<f:selectItem itemLabel="Autocomplete" itemValue="autocomplete"/>
+							<f:selectItem itemLabel="Multiplos Campos" itemValue="multicampos"/>
+							<a4j:support event="onchange" action="#{xmlBean.verificarTipoCampo}" reRender="itemCampoLabel,itemCampo,itemCampoErro"/>
+			    		</h:selectOneMenu>
+			    		
+			    		<h:commandLink action="#{xmlBean.verificarTipoSubcampo}" value="NovoItem" styleClass="novo" style="padding-left:20px">
+				      		<a4j:support event="onclick" action="#{xmlBean.verificarTipoSubcampo}"/>
+				      	</h:commandLink>
+		
+			    		<h:commandLink action="#{xmlBean.verificarTipoSubcampo}" value="Autocomplete" styleClass="novo" style="padding-left:20px">
+				      		<a4j:support event="onclick" action="#{xmlBean.verificarTipoSubcampo}"/>
+				      	</h:commandLink>
+
+					</dd>
+					
+					<dt><h:outputLabel value="Obrigatório" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:selectOneMenu  value="#{xmlBean.subcampo.obrigatorio}" style="width:60px">
+							<f:selectItem itemLabel="Sim" itemValue="1"/>
+							<f:selectItem itemLabel="Não" itemValue="0"/>
+				    	</h:selectOneMenu>
+					</dd>
+
+					<dt><h:outputLabel value="Mascara" for="maskSubcampo" styleClass="labelNegrito"/></dt>
+					<dd>
+						<h:selectOneMenu id="maskSubcampo" value="#{xmlBean.subcampo.regex}" style="width:100px">
+							<f:selectItem itemLabel="Selecione ..." itemValue=""/>
+							<f:selectItem itemLabel="Data" itemValue="\d{2}/\d{2}/\d{4}"/>
+							<f:selectItem itemLabel="RG" itemValue="[0-9]+[0-9]+"/>
+							<f:selectItem itemLabel="CPF" itemValue="[0-9]{3}\."/>
+							<f:selectItem itemLabel="Númerico" itemValue="[0-9]+"/>
+							<f:selectItem itemLabel="Telefone" itemValue="(\(\d{2}\)-)?\d{4}-d{4}"/>
+			    		</h:selectOneMenu>
+			    		<rich:message errorClass="error" for="maskSubcampo" styleClass="message"/>
+					</dd>
 
 				    <dd>
-			       		<h:inputText id="multiplosCamposLabel" value="#{xmlBean.subcampoInclude}"  size="30" maxlength="30" style="text-transform:none;"/>
-			       		<h:commandLink action="#{xmlBean.adicionarSubcampo}" value="Incluir Item" styleClass="novo">
+			       		<h:commandLink action="#{xmlBean.adicionarSubcampo}" value="Adicionar subcampo" styleClass="novo">
 				      		<a4j:support event="onclick"/>
 				      	</h:commandLink>
+
 			      	</dd>
+
 		       		<rich:message id="itemSubcampoErro" errorClass="error" for="multiplosCamposLabel" styleClass="message"/>
 				</fieldset>
 		       		
@@ -193,8 +259,8 @@
 					
       		</rich:dataTable>
       		
-			<h:commandLink action="#{xmlBean.adicionarCampo}" value="Adicionar" styleClass="novo" style="padding-left:20px">
-	      		<a4j:support event="onclick" reRender="dataTable2, subnivelList" />
+			<h:commandLink action="#{xmlBean.adicionarCampo}" value="Adicionar Campo" styleClass="novo" style="padding-left:20px">
+	      		<a4j:support event="onclick" reRender="dataTable2, gridMultCampos" />
 	      	</h:commandLink>
 
       	</fieldset>

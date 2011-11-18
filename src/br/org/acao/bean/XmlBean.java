@@ -31,8 +31,7 @@ public class XmlBean extends EntityBean<Integer, Campo>  {
 	private String targetNamespace = "";
 	private int obrigatorio;
 
-	private Indice indice = new Indice();
-	private Campo campo = new Campo();
+
 	private String subNivel;
 	private String nomeArquivo;
 
@@ -43,12 +42,17 @@ public class XmlBean extends EntityBean<Integer, Campo>  {
 	private boolean select;
 	private String itemToInclude;
 	private String itemToRemove;
-	private Campo campoRemove = new Campo();
-	private Campo campoInclude = new Campo();
+
+
 	private Integer up;
 	private Integer down;
-	private boolean multiCampos;
-	private Campo subcampoInclude;
+	private boolean multicampos;
+
+	private Indice indice = new Indice();
+	private Campo campoRemove = new Campo();
+	private Campo campoInclude = new Campo();
+	private Campo campo = new Campo();
+	private Campo subcampo = new Campo();
 
 	private Map<String, List<Campo>> subNivelMap = new HashMap<String, List<Campo>>();
 
@@ -108,16 +112,17 @@ public class XmlBean extends EntityBean<Integer, Campo>  {
 		this.indice = new Indice();
 		return SUCCESS;
 	}
-	
+
 	/*
 	 * Acionar um subcampo ao campo corrente
 	 */
 	public String adicionarSubcampo(){
-		
+
 		if(this.campo.getSubcampos() == null){
 			this.campo.setSubcampos(new ArrayList<Campo>());
 		}
-		this.campo.getSubcampos().add(this.subcampoInclude);
+		this.campo.getSubcampos().add(this.subcampo);
+		this.subcampo = new Campo();
 		return SUCCESS;
 	}
 
@@ -130,7 +135,7 @@ public class XmlBean extends EntityBean<Integer, Campo>  {
 
 			this.campo.setSubnivelName(this.campo.getSubnivelName().trim().replace(" ", "").toLowerCase());
 			this.campo.setSubnivelLabel(this.campo.getSubnivelLabel().trim());
-			
+
 			subNivelName = this.campo.getSubnivelName();
 			subNivelLabel = this.campo.getSubnivelLabel();
 
@@ -142,7 +147,7 @@ public class XmlBean extends EntityBean<Integer, Campo>  {
 				subNivelMap.get(subNivelName).add(this.campo);
 			}
 			this.autocomplete = false;
-			this.multiCampos = false;
+			this.multicampos = false;
 
 		} else {
 
@@ -157,7 +162,7 @@ public class XmlBean extends EntityBean<Integer, Campo>  {
 					subNivelMap.get(subNivelName).add(this.campo);
 				}
 				this.autocomplete = false;
-				this.multiCampos = false;
+				this.multicampos = false;
 			}
 		}
 
@@ -166,12 +171,13 @@ public class XmlBean extends EntityBean<Integer, Campo>  {
 		for (String s : subNivelMap.keySet()) {
 			this.campos.addAll(subNivelMap.get(s));
 		}
-		
+
 		this.select = false;
 
 		this.campo = new Campo();
 		this.campo.setSubnivelName(subNivelName);
 		this.campo.setSubnivelLabel(subNivelLabel);
+		this.subcampo = new Campo();
 		return SUCCESS;
 	}
 
@@ -210,7 +216,7 @@ public class XmlBean extends EntityBean<Integer, Campo>  {
 		this.campoRemove = new Campo();
 		return SUCCESS;
 	}
-	
+
 	public String limparSubnivel(){
 		this.campo.setSubnivelLabel("");
 		this.campo.setSubnivelName("");
@@ -275,22 +281,47 @@ public class XmlBean extends EntityBean<Integer, Campo>  {
 			if(this.campo.getTipo().equals("select")){
 				this.select = true;
 				this.autocomplete = false;
-				this.multiCampos = false;
+				this.multicampos = false;
 				return SUCCESS;
 			} else if(this.campo.getTipo().equals("autocomplete")){
 				this.select = false;
 				this.autocomplete = true;
-				this.multiCampos = false;
+				this.multicampos = false;
 				return SUCCESS;
 			} else if(this.campo.getTipo().equals("multicampos")){
 				this.select = false;
 				this.autocomplete = false;
-				this.multiCampos = true;
+				this.multicampos = true;
 				return SUCCESS;
 			}
 		}
 		this.select = false;
-		this.multiCampos = false;
+		this.multicampos = false;
+		return SUCCESS;
+	}
+
+	public String verificarTipoSubcampo(){
+
+		if(this.subcampo.getTipo() != null){
+			if(this.subcampo.getTipo().equals("select")){
+				this.select = true;
+				this.autocomplete = false;
+				this.multicampos = false;
+				return SUCCESS;
+			} else if(this.subcampo.getTipo().equals("autocomplete")){
+				this.select = false;
+				this.autocomplete = true;
+				this.multicampos = false;
+				return SUCCESS;
+			} else if(this.subcampo.getTipo().equals("multicampos")){
+				this.select = false;
+				this.autocomplete = false;
+				this.multicampos = true;
+				return SUCCESS;
+			}
+		}
+		this.select = false;
+		this.multicampos = false;
 		return SUCCESS;
 	}
 
@@ -319,6 +350,24 @@ public class XmlBean extends EntityBean<Integer, Campo>  {
 
 		byte[] bytes = VelocityUtil.merge("template-schema.vm", new String[]{"documento", "subniveis"}, new Object[]{documento, subniveis});
 		return DownloadFileUtil.downloadFile(bytes, this.nomeArquivo + ".xsd", "application/text");
+	}
+
+
+	public String reset(){
+
+		this.campo = new Campo();
+		this.subcampo = new Campo();
+		indices = new ArrayList<Indice>();
+		campos = new ArrayList<Campo>();
+		subNivelMap = new HashMap<String, List<Campo>>();
+		return SUCCESS;
+	}
+
+
+	public String resetSubcampo(){
+		this.subcampo = new Campo();
+		this.multicampos = false;
+		return SUCCESS;
 	}
 
 	public String getSubNivel() {
@@ -485,21 +534,21 @@ public class XmlBean extends EntityBean<Integer, Campo>  {
 	public void setDown(Integer down) {
 		this.down = down;
 	}
-	
-	public boolean isMultiCampos() {
-		return multiCampos;
+
+	public boolean isMulticampos() {
+		return multicampos;
 	}
 
-	public void setMultiCampos(boolean multiCampos) {
-		this.multiCampos = multiCampos;
+	public void setMulticampos(boolean multicampos) {
+		this.multicampos = multicampos;
 	}
 
-	public Campo getSubcampoInclude() {
-		return subcampoInclude;
+	public Campo getSubcampo() {
+		return subcampo;
 	}
 
-	public void setSubcampoInclude(Campo subcampoInclude) {
-		this.subcampoInclude = subcampoInclude;
+	public void setSubcampo(Campo subcampo) {
+		this.subcampo = subcampo;
 	}
 
 	@Override
