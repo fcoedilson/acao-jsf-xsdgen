@@ -1,0 +1,118 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://schemas.fortaleza.ce.gov.br/acao/semas-identificacao-familias-cras.xsd"
+    xmlns:class="http://schemas.fortaleza.ce.gov.br/acao/classificacao.xsd"
+    xmlns:idx="http://schemas.fortaleza.ce.gov.br/acao/indexhint.xsd"
+    xmlns:xsdext="http://schemas.fortaleza.ce.gov.br/xsdform/extensions.xsd"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    targetNamespace="http://schemas.fortaleza.ce.gov.br/acao/semas-identificacao-familias-cras.xsd"
+    elementFormDefault="qualified">
+
+    <xs:element name="formFichaIdentificacaoFamilia" type="formFichaIdentificacaoFamilia">
+        <xs:annotation>
+            <xs:appinfo>
+                <xhtml:label>3. Composição Familiar</xhtml:label>
+                <class:classificacoes>
+                    <class:classificacao>cd=Assistencia Social</class:classificacao>
+                </class:classificacoes>
+                <idx:index>
+                </idx:index>
+            </xs:appinfo>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="formFichaIdentificacaoFamilia">
+        <xs:sequence>
+			
+			<xs:element name="composicaofamiliar">
+			
+				<xs:annotation>
+					<xs:appinfo>
+						<xhtml:label>Composição Familiar</xhtml:label>
+					</xs:appinfo>
+				</xs:annotation>
+				
+				<xs:complexType>
+					<xs:sequence>
+
+						<xs:element name="composicaoFamiliar">
+							<xs:annotation>
+								<xs:appinfo>
+									<xhtml:label>Composição Familiar</xhtml:label>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+							        <xs:element name="nome" minOccurs="0">
+							            <xs:annotation>
+							                <xs:appinfo>
+							                    <xhtml:label>Nome</xhtml:label>
+							                </xs:appinfo>
+							            </xs:annotation>
+							            <xs:simpleType>
+							                <xs:restriction base="xs:string">
+							                    <xs:maxLength value="255"/>
+							                </xs:restriction>
+							            </xs:simpleType>
+							        </xs:element>
+									<xs:element name="sexo"  minOccurs="0">
+										<xs:annotation>
+											<xs:appinfo>
+												<xhtml:label>Sexo</xhtml:label>
+											</xs:appinfo>
+										</xs:annotation>
+										<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="BPC Idoso" />
+											<xs:enumeration value="BPC Deficiente" />
+											<xs:enumeration value="PETI" />
+											<xs:enumeration value="Programa Bolsa Familia" />
+										</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="beneficio"  minOccurs="0">
+										<xs:annotation>
+											<xs:appinfo>
+												<xhtml:label>Beneficio</xhtml:label>
+											</xs:appinfo>
+										</xs:annotation>
+										<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="BPC Idoso" />
+											<xs:enumeration value="BPC Deficiente" />
+											<xs:enumeration value="PETI" />
+											<xs:enumeration value="Programa Bolsa Familia" />
+											<xs:enumeration value="Projem Urbano" />
+											<xs:enumeration value="Outro" />
+										</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="membroDataNascimento" minOccurs="0" type="xs:date">
+										<xs:annotation>
+											<xs:appinfo>
+												<xhtml:label>Data Nascimento</xhtml:label>
+											</xs:appinfo>
+										</xs:annotation>
+									</xs:element>
+							        <xs:element name="escolaridade" minOccurs="0">
+							            <xs:annotation>
+							                <xs:appinfo>
+							                    <xhtml:label>Escolaridade</xhtml:label>
+							                </xs:appinfo>
+							            </xs:annotation>
+							            <xs:simpleType>
+							                <xs:restriction base="xs:string">
+							                    <xs:maxLength value="255"/>
+							                </xs:restriction>
+							            </xs:simpleType>
+							        </xs:element>
+										</xs:sequence>
+									</xs:complexType>
+						
+						</xs:element>
+		            </xs:sequence>
+		        </xs:complexType>
+	        </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	
+
+	<fieldset style="margin-bottom:20px">
+	
+		 <legend>Subcampo</legend>
+	
+		<dt><h:outputLabel value="Name(Sub)" for="idsubcampo" styleClass="labelNegrito"/></dt>
+		<dd>
+			<h:inputText id="idSubcampo" value="#{xmlBean.subcampo.name}"  size="30" maxlength="30" style="text-transform:none;">
+			</h:inputText>
+			<rich:message errorClass="error" for="idsubcampo" styleClass="message"/>
+		</dd>
+		
+		<dt><h:outputLabel value="Label(Sub)" for="nomeSubcampo" styleClass="labelNegrito"/></dt>
+		<dd>
+			<h:inputText id="nomeSubcampo" value="#{xmlBean.subcampo.label}"  size="40" maxlength="120" style="text-transform:none;">
+			</h:inputText>
+			<rich:message errorClass="error" for="nomeSubcampo" styleClass="message"/>
+		</dd>
+		
+		<dt><h:outputLabel value="Tipo(Sub)" for="tipoSubcampo" styleClass="labelNegrito"/></dt>
+		<dd>
+			<h:selectOneMenu id="tipoSubcampo" value="#{xmlBean.subcampo.tipo}" style="width:100px">
+				<f:selectItem itemLabel="Selecione ..." itemValue=""/>
+				<f:selectItem itemLabel="String" itemValue="text"/>
+				<f:selectItem itemLabel="Inteiro" itemValue="integer"/>
+				<f:selectItem itemLabel="Data" itemValue="date"/>
+				<f:selectItem itemLabel="Decimal" itemValue="float"/>
+				<f:selectItem itemLabel="Select" itemValue="select"/>
+				<f:selectItem itemLabel="Checkbox" itemValue="checkbox"/>
+				<f:selectItem itemLabel="Checkbox List" itemValue="checkboxlist"/>
+				<f:selectItem itemLabel="Textarea" itemValue="textarea"/>
+				<f:selectItem itemLabel="Autocomplete" itemValue="autocomplete"/>
+				<f:selectItem itemLabel="Multiplos Campos" itemValue="multicampos"/>
+	   		</h:selectOneMenu>
+	   		
+	   		<h:commandLink action="#{xmlBean.verificarTipoSubcampo}" value="NovoItem" styleClass="novo" style="padding-left:20px">
+	      		<a4j:support event="onclick" action="#{xmlBean.verificarTipoSubcampo}"/>
+	      	</h:commandLink>
+	
+	   		<h:commandLink action="#{xmlBean.verificarTipoSubcampo}" value="Autocomplete" styleClass="novo" style="padding-left:20px">
+	      		<a4j:support event="onclick" action="#{xmlBean.verificarTipoSubcampo}"/>
+	      	</h:commandLink>
+	
+		</dd>
+		
+		<dt><h:outputLabel value="Obrig.(Sub)" styleClass="labelNegrito"/></dt>
+		<dd>
+			<h:selectOneMenu  value="#{xmlBean.subcampo.obrigatorio}" style="width:60px">
+				<f:selectItem itemLabel="Sim" itemValue="1"/>
+				<f:selectItem itemLabel="Não" itemValue="0"/>
+	    	</h:selectOneMenu>
+		</dd>
+	
+		<dt><h:outputLabel value="Mask(Sub)" for="maskSubcampo" styleClass="labelNegrito"/></dt>
+		<dd>
+			<h:selectOneMenu id="maskSubcampo" value="#{xmlBean.subcampo.regex}" style="width:100px">
+				<f:selectItem itemLabel="Selecione ..." itemValue=""/>
+				<f:selectItem itemLabel="Data" itemValue="\d{2}/\d{2}/\d{4}"/>
+				<f:selectItem itemLabel="RG" itemValue="[0-9]+[0-9]+"/>
+				<f:selectItem itemLabel="CPF" itemValue="[0-9]{3}\."/>
+				<f:selectItem itemLabel="Númerico" itemValue="[0-9]+"/>
+				<f:selectItem itemLabel="Telefone" itemValue="(\(\d{2}\)-)?\d{4}-d{4}"/>
+	   		</h:selectOneMenu>
+	   		<rich:message errorClass="error" for="maskSubcampo" styleClass="message"/>
+		</dd>
+		
+		<a4j:outputPanel id="gridItemSubcampo" rendered="#{xmlBean.selectSub}">
+			<dt>
+		    	<h:outputLabel id="itemSubcampoLabel" value="Item Subcampo" for="itemSubcampo" styleClass="labelNegrito"/>
+		    </dt>
+		    <dd>
+	       		<h:inputText id="itemSubcampo" value="#{xmlBean.itemSubcampoInclude}"  size="30" maxlength="30" style="text-transform:none;"/>
+	       		
+	       		<h:commandLink action="#{xmlBean.adicionarItemSubcampo}" value="Incluir" styleClass="novo">
+		      		<a4j:support event="oncomplete" reRender="dataTableItensSubcampo"/>
+		      	</h:commandLink>
+		      	<rich:message id="itemSubcampoErro" errorClass="error" for="itemSubcampo" styleClass="message"/>
+	      	</dd>
+	      		
+	      		
+	      	</a4j:outputPanel>
+
+	      	<dd>	
+	     		<rich:dataTable id="dataTableItensSubcampo" value="#{xmlBean.subcampo.itens}" rendered="#{not empty xmlBean.subcampo.itens}" var="item" rows="20" rowKeyVar="index"
+	     		   	rowClasses="even, odd" 
+	      			onRowMouseOver="jQuery(this).addClass('trHover')" 
+	      			onRowMouseOut="jQuery(this).removeClass('trHover')" style="width:280px;align:center;">
+	
+					<rich:column width="2%" style="text-align: center;" > 
+						<f:facet name="header"><h:outputText value="Nº" /></f:facet>
+						<h:outputText value="#{index+1}" style="color: black;"/>
+					</rich:column>
+	
+					<rich:column width="20%" style="text-align: left;" > 
+						<f:facet name="header"><h:outputText value="Item" /></f:facet>
+						<h:outputText value="#{item}" style="color: black;"/>
+					</rich:column>
+					
+					<rich:column width="1%" style="text-align: center;">
+						<h:commandLink id="up" styleClass="up"  action="#{xmlBean.upItem}">
+							<h:graphicImage value="../../images/up.jpeg" style="border:0" />
+							<f:setPropertyActionListener target="#{xmlBean.up}" value="#{index}"/>
+							<a4j:support event="onclick" reRender="dataTable2"/>
+						</h:commandLink>
+					</rich:column>
+	
+					<rich:column width="1%" style="text-align: center;">
+						<h:commandLink id="down" styleClass="down"  action="#{xmlBean.downItem}" >
+							<h:graphicImage value="../../images/down.jpeg" style="border:0" />
+							<f:setPropertyActionListener target="#{xmlBean.down}" value="#{index}"/>
+							<a4j:support event="onclick" reRender="dataTable2"/>
+						</h:commandLink>
+					</rich:column>
+					
+					<rich:column width="2%" style="text-align: center;">
+						<h:commandLink id="remove" styleClass="excluir"  action="#{xmlBean.removeItemCampo}" value="Excluir">
+							<f:setPropertyActionListener target="#{xmlBean.itemToRemove}" value="#{item}"/>
+							<a4j:support event="oncomplete" reRender="dataTableItensCampo"/>
+						</h:commandLink>
+					</rich:column>
+					
+	     		</rich:dataTable>
+			</dd>
+
+	    	<dd>
+	      		<h:commandLink action="#{xmlBean.adicionarSubcampo}" value="Adicionar subcampo" styleClass="novo">
+	      			<a4j:support event="onclick" reRender="dataTableItensSubcampo"/>
+	      		</h:commandLink>
+	     	</dd>
+	
+     		<dd>
+	    		<rich:dataTable id="dataTableSubcampos" value="#{xmlBean.campo.subcampos}" rendered="#{not empty xmlBean.campo.subcampos}" var="sub" rows="20" rowKeyVar="index"
+	    		   rowClasses="even, odd" 
+	     		onRowMouseOver="jQuery(this).addClass('trHover')" 
+	     		onRowMouseOut="jQuery(this).removeClass('trHover')" style="width:480px;align:center;">
+	
+				<rich:column width="2%" style="text-align: center;" > 
+					<f:facet name="header"><h:outputText value="Nº" /></f:facet>
+					<h:outputText value="#{index+1}" style="color: black;"/>
+				</rich:column>
+	
+				<rich:column width="20%" style="text-align: left;" > 
+					<f:facet name="header"><h:outputText value="Nome" /></f:facet>
+					<h:outputText value="#{sub.name}" style="color: black;"/>
+				</rich:column>
+				<rich:column width="20%" style="text-align: left;" > 
+					<f:facet name="header"><h:outputText value="Label" /></f:facet>
+					<h:outputText value="#{sub.label}" style="color: black;"/>
+				</rich:column>
+				<rich:column width="2%" style="text-align: center;">
+					<h:commandLink id="remove" styleClass="excluir"  action="#{xmlBean.removeItenSubcampo}" value="Excluir">
+						<f:setPropertyActionListener target="#{xmlBean.subcampoRemove}" value="#{sub}"/>
+						<a4j:support event="oncomplete" reRender="dataTableItensSubcampo"/>
+					</h:commandLink>
+				</rich:column>
+				
+	    		</rich:dataTable>
+    		</dd>
+	     		
+	</fieldset>
+
+
+
+</ui:composition>
